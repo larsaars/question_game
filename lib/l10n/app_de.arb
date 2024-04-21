@@ -1,3 +1,6 @@
 {
-  "appTitle": "Question Game"
+  "appTitle": "Fragenspiel",
+  "startGame": "Spiel starten",
+  "chooseCategories": "Kategorien wählen",
+  "about": "Über"
 }
