@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:question_game/utils/ui_utils.dart';
+import 'package:question_game/utils/ui_utils.dart' as ui_utils;
 
 void main() {
   runApp(const MyApp());
@@ -14,17 +13,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Question Game',
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: ui_utils.colorPrimary),
+        iconTheme: const IconThemeData(
+          color: ui_utils.colorDefaultIcon,
+          size: ui_utils.defaultIconSize,
+        ),
         useMaterial3: true,
-        textTheme: GoogleFonts.robotoTextTheme(),
+        fontFamily: 'louis_george_cafe',
       ),
       home: const MyHomePage(),
     );
@@ -37,59 +35,60 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: createRandomPastelBackgroundColor(),
-        body: Center(
-          child: IntrinsicWidth(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Image.asset(
-                          'image/app_icon.png',
-                          height: 100,
-                        ),
+      backgroundColor: ui_utils.backgroundColor,
+      body: Stack(
+        children: [
+          Center(
+            child: IntrinsicWidth(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      AppLocalizations.of(context)!.appTitle,
+                      style: const TextStyle(
+                        fontSize: 64,
+                        fontFamily: 'alte_haas_grotesk',
+                        fontWeight: FontWeight.w700,
+                        color: ui_utils.colorPrimary,
                       ),
-                      Text(
-                        AppLocalizations.of(context)!.appTitle,
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: SizedBox(
-                    height: 48,
-                    child: Stack(
-                      children: [
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Icon(
-                            Icons.videogame_asset,
-                            size: 42,
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            AppLocalizations.of(context)!.startGame,
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                        )
-                      ],
                     ),
                   ),
-                )
-              ],
+                  ui_utils.IconButton(
+                    icon: Icons.videogame_asset,
+                    text: AppLocalizations.of(context)!.mainScreenStartGame,
+                    textColor: ui_utils.colorPrimary,
+                    iconColor: ui_utils.colorPrimary,
+                    onPressed: () {},
+                  ),
+                  ui_utils.IconButton(
+                    icon: Icons.category,
+                    text: AppLocalizations.of(context)!
+                        .mainScreenChooseCategories,
+                    onPressed: () {},
+                  ),
+                  ui_utils.IconButton(
+                      icon: Icons.question_mark_outlined,
+                      text: AppLocalizations.of(context)!.mainScreenAbout,
+                      onPressed: () {}),
+                ],
+              ),
             ),
           ),
-        ));
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'imgs/app_icon.png',
+                width: ui_utils.defaultIconSize,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

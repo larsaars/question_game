@@ -1,6 +1,6 @@
 {
   "appTitle": "Fragenspiel",
-  "startGame": "Spiel starten",
-  "chooseCategories": "Kategorien wählen",
-  "about": "Über"
+  "mainScreenStartGame": "SPIELEN",
+  "mainScreenChooseCategories": "KATEGORIEN WÄHLEN",
+  "mainScreenAbout": "ÜBER"
 }
