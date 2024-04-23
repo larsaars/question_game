@@ -1,6 +1,7 @@
 {
-  "appTitle": "Fragenspiel",
+  "appTitle": "fragenspiel",
+  "appVersion": "1.0",
   "mainScreenStartGame": "SPIELEN",
   "mainScreenChooseCategories": "KATEGORIEN WÄHLEN",
-  "mainScreenAbout": "ÜBER"
+  "mainScreenAbout": "ÜBER",
 }
