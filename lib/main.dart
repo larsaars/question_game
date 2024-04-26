@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/routes/about.dart';
+import 'package:question_game/ui/routes/choose_categories.dart';
 import 'package:question_game/ui/routes/home_page.dart';
 import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 
@@ -26,11 +27,15 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
         fontFamily: 'louis_george_cafe',
+        pageTransitionsTheme: PageTransitionsTheme(builders: {
+          for (final type in TargetPlatform.values)
+            type: const FadeUpwardsPageTransitionsBuilder()
+        }),
       ),
       routes: {
         '/': (context) => const MyHomePage(),
+        '/categories': (context) => const ChooseCategoriesPage(),
       },
     );
   }
 }
-

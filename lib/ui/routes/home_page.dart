@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
+import 'package:question_game/ui/widgets/loader_widget.dart';
 
 import '../widgets/centered_text_icon_button.dart';
 import 'about.dart';
@@ -53,9 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // default title text can only be here set (not in initState)
     // since it requires the context which is not available before
     _defaultTitleText ??= _titleText = AppLocalizations.of(context)!.appTitle;
-    return Scaffold(
-      backgroundColor: ui_defaults.backgroundColor,
-      body: Stack(
+    return ui_defaults.DefaultScaffold(
+      backButton: false,
+      child: Stack(
         children: [
           Center(
             child: IntrinsicWidth(
@@ -77,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   CenteredTextIconButton(
                     icon: Icons.videogame_asset,
-                    text: AppLocalizations.of(context)!.mainScreenStartGame,
+                    text: AppLocalizations.of(context)!.mainPageStartGame,
                     textColor: ui_defaults.colorPrimary,
                     iconColor: ui_defaults.colorPrimary,
                     onPressed: () {},  // TODO below continue last game and play last game instance
@@ -85,27 +86,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   CenteredTextIconButton(
                     icon: Icons.category,
                     text: AppLocalizations.of(context)!
-                        .mainScreenChooseCategories,
-                    onPressed: () {},
+                        .mainPageChooseCategories,
+                    onPressed: () => Navigator.pushNamed(context, '/categories'),
                   ),
                 ],
               ),
             ),
           ),
           Align(
-            alignment: Alignment.topLeft,
-            child: IconButton(
-              icon: Image.asset(
-                'imgs/app_icon.png',
-                width: ui_defaults.defaultIconSize,
-              ),
-              onPressed: () {},
-            ),
-          ),
-          Align(
             alignment: Alignment.topRight,
             child: IconButton(
               icon: const Icon(Icons.question_mark_outlined),
+              tooltip: AppLocalizations.of(context)!.mainPageAboutButtonTooltip,
               onPressed: () => showMyAboutDialog(context)
             ),
           )

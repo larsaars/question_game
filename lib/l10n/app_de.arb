@@ -1,7 +1,15 @@
 {
   "appTitle": "fragenspiel",
   "appVersion": "1.0",
-  "mainScreenStartGame": "SPIELEN",
-  "mainScreenChooseCategories": "KATEGORIEN WÄHLEN",
-  "mainScreenAbout": "ÜBER",
+  "defaultScaffoldBack": "zurück",
+  "mainPageStartGame": "SPIELEN",
+  "mainPageChooseCategories": "KATEGORIEN WÄHLEN",
+  "mainPageAboutButtonTooltip": "Über das Spiel",
+  "chooseCategoriesPageTitle": "Kategorien wählen",
+  "categoryQuestion": "Fragen",
+  "categoryPoll": "Abstimmungen",
+  "categoryChallenge": "Challenges",
+  "categoryBomb": "Bombe",
+  "categoryRule": "Regeln",
+  "categoryYesOrNo": "Ja oder Nein"
 }

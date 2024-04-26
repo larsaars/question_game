@@ -1,10 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Color createRandomPastelBackgroundColor() {
   return Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0)
-      .withOpacity(0.2);
+      .withOpacity(0.05);
 }
 
 final backgroundColor = createRandomPastelBackgroundColor();
@@ -15,7 +16,8 @@ const colorPrimary = Color(0xFFC2185B),
     colorYes = Color(0xf003d33f),
     colorNo = Color(0xf7f0000f),
     colorSubQuestionText = Color(0xff455a64),
-    colorCategoryDefault = colorPrimary,
+// category colors
+    colorCategoryQuestion = colorPrimary,
     colorCategoryPoll = Color(0xff8BC34A),
     colorCategoryChallenge = Color(0xffFFEB3B),
     colorCategoryBomb = Color(0xffFFA726),
@@ -25,3 +27,49 @@ const colorPrimary = Color(0xFFC2185B),
 
 const defaultIconSize = 36.0, defaultButtonHeight = 48.0;
 
+// default scaffold as outermost widget to embed other widgets
+// contains a back button and a child widget
+class DefaultScaffold extends StatelessWidget {
+  final Widget child;
+  final bool backButton;
+
+  const DefaultScaffold({
+    super.key,
+    required this.child,
+    this.backButton = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: defaultIconSize),
+            child: child,
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Hero(
+              tag: 'default-scaffold-button',
+              child: IconButton(
+                tooltip: backButton ? loc!.defaultScaffoldBack : loc!.appTitle,
+                icon: backButton
+                    ? const Icon(Icons.arrow_back_ios_new)
+                    : Image.asset(
+                        'imgs/app_icon.png',
+                        height: defaultIconSize,
+                      ),
+                onPressed: () =>
+                    backButton ? Navigator.of(context).pop() : null,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
