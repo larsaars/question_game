@@ -4,6 +4,8 @@ import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 import 'package:question_game/ui/widgets/loader_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../widgets/default_scaffold.dart';
+
 class ChooseCategoriesPage extends StatefulWidget {
   const ChooseCategoriesPage({super.key});
 
@@ -14,16 +16,6 @@ class ChooseCategoriesPage extends StatefulWidget {
 class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
   late List? _items;
   late AppLocalizations? loc;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   Future _initItems() async {
     final loc = AppLocalizations.of(context);
@@ -53,7 +45,7 @@ class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ui_defaults.DefaultScaffold(
+    return DefaultScaffold(
       child: LoaderWidget(
         loadFunc: _initItems,
         childFunc: () => ListView.builder(

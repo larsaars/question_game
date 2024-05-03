@@ -1,11 +1,17 @@
 {
   "appTitle": "fragenspiel",
   "appVersion": "1.0",
+
   "defaultScaffoldBack": "zurück",
+  "defaultScaffoldAbout": "Über das Spiel",
+  "defaultScaffoldInstall": "Als App installieren",
+
   "mainPageStartGame": "SPIELEN",
   "mainPageChooseCategories": "KATEGORIEN WÄHLEN",
-  "mainPageAboutButtonTooltip": "Über das Spiel",
-  "chooseCategoriesPageTitle": "Kategorien wählen",
+
+  "currentPlayersPageAddPlayer": "Spieler hinzufügen",
+  "currentPlayersPagePlayerName": "Name",
+
   "categoryQuestion": "Fragen",
   "categoryPoll": "Abstimmungen",
   "categoryChallenge": "Challenges",
