@@ -1,2 +1,2 @@
 # flutter_question_game
-Question entertainment game project for DAPI.
+A question game for entertaining groups programmed with [flutter](https://flutter.dev) for DAPI.

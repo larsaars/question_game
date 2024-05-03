@@ -30,4 +30,5 @@ Future<void> _registerLicense(String name, String assetPath) async {
 Future<void> registerLicenses() async {
   _registerLicense('Alte Haas Grotesk (Font)', 'licenses/License_Alte_Haas_Grotesk.txt');
   _registerLicense('Louis George Cafe (Font)', 'licenses/License_Louis_George_Cafe.txt');
+  _registerLicense('Flaticon', 'licenses/flaticon.txt');
 }

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pwa_install/pwa_install.dart';
 import 'package:question_game/ui/routes/about.dart';
 import 'package:question_game/ui/routes/choose_categories.dart';
 import 'package:question_game/ui/routes/home_page.dart';
 import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 
-void main() {
+Future<void> main() async {
+  // Ensure Flutter binding is initialized
+  WidgetsFlutterBinding.ensureInitialized();  // register pwa class
+  PWAInstall().setup(installCallback: () {
+    debugPrint('APP INSTALLED!');
+  });
+  // register licenses
   registerLicenses();
+  // start app
   runApp(const MyApp());
 }
 

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pwa_install/pwa_install.dart';
 
 Color createRandomPastelBackgroundColor() {
   return Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0)
@@ -39,6 +40,15 @@ class DefaultScaffold extends StatelessWidget {
     this.backButton = true,
   });
 
+  // prompt installing as PWA if is enabled
+  void _promptInstallPWA() {
+    final installer = PWAInstall();
+    print(installer.installPromptEnabled);
+    if (installer.installPromptEnabled) {
+      installer.promptInstall_();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
@@ -64,7 +74,7 @@ class DefaultScaffold extends StatelessWidget {
                         height: defaultIconSize,
                       ),
                 onPressed: () =>
-                    backButton ? Navigator.of(context).pop() : null,
+                    backButton ? Navigator.of(context).pop() : _promptInstallPWA(),
               ),
             ),
           ),
