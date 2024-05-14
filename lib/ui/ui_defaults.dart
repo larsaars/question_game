@@ -16,15 +16,7 @@ const colorPrimary = Color(0xFFC2185B),
     colorDefaultIcon = Colors.black,
     colorYes = Color(0xf003d33f),
     colorNo = Color(0xf7f0000f),
-    colorSubQuestionText = Color(0xff455a64),
-// category colors
-    colorCategoryQuestion = colorPrimary,
-    colorCategoryPoll = Color(0xff8BC34A),
-    colorCategoryChallenge = Color(0xffFFEB3B),
-    colorCategoryBomb = Color(0xffFFA726),
-    colorCategoryRule = Color(0xff102027),
-    colorCategoryYesOrNo = Color(0xff03A9F4),
-    colorCategoryEtc = colorCategoryRule;
+    colorSubQuestionText = Color(0xff455a64);
 
 const defaultIconSize = 36.0, defaultButtonHeight = 48.0;
 

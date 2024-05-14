@@ -1,0 +1,29 @@
+{
+  "0": {
+    "name": "Fragen",
+    "color": "#C2185B",
+    "files": [
+      ""
+    ]
+  },
+  "1": {
+    "name": "Challenges",
+    "color": "#FFEB3B"
+  },
+  "2": {
+    "name": "Abstimmungen",
+    "color": "#8BC34A"
+  },
+  "3": {
+    "name": "Bombe",
+    "color": "#FFA726"
+  },
+  "4": {
+    "name": "Ja oder Nein",
+    "color": "#03A9F4"
+  },
+  "5": {
+    "name": "Regeln",
+    "color": "#102027"
+  }
+}
