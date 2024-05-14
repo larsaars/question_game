@@ -90,12 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () =>
                         Navigator.pushNamed(context, '/categories'),
                   ),
-                  CenteredTextIconButton(
-                    icon: Icons.abc,
-                    text: 'chooooooo',
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/current-players'),
-                  ),
                 ],
               ),
             ),

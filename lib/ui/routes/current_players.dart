@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 import 'package:question_game/ui/widgets/loader_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +32,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
       String player, Animation<double> animation, int index) {
     return SlideTransition(
       position: Tween<Offset>(
-        begin: const Offset(1, 0),
+        begin: const Offset(-1, 0),
         end: const Offset(0, 0),
       ).animate(animation),
       child: ListTile(
@@ -39,7 +40,8 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
           controller: TextEditingController(text: player),
           focusNode: _focusNodes[index],
           decoration: InputDecoration(
-            hintText: AppLocalizations.of(context)!.currentPlayersPagePlayerName,
+            hintText:
+                AppLocalizations.of(context)!.currentPlayersPagePlayerName,
             border: InputBorder.none,
           ),
           onSubmitted: (value) {
@@ -66,24 +68,36 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
   }
 
   void _addPlayer() {
-    // insert in list and in animated list
-    _currentPlayers.add('');
-    _listKey.currentState!.insertItem(_currentPlayers.length - 1);
-    // add focus node to list
-    _focusNodes.add(FocusNode());
-    // focus the new text field
-    FocusScope.of(context).requestFocus(_focusNodes.last);
+    setState(() {
+      // add focus node to list
+      _focusNodes.add(FocusNode());
+      // insert in list and in animated list
+      _currentPlayers.add('');
+      _listKey.currentState!.insertItem(_currentPlayers.length - 1);
+    });
+
+    // focus the new text field after it has been built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focusNodes.last);
+    });
   }
 
   void _removePlayer(int index) {
-    // remove from list and animated list
-    String removedPlayer = _currentPlayers.removeAt(index);
-    _listKey.currentState!.removeItem(
-      index,
-      (context, animation) => _buildPlayerItem(removedPlayer, animation, index),
-    );
-    // remove focus node from list
-    _focusNodes.removeAt(index);
+    setState(() {
+      String removedPlayer =
+          _currentPlayers.removeAt(index); // remove from list
+      // remove from animated list after removing from list
+      _listKey.currentState!.removeItem(
+        index,
+        (context, animation) =>
+            _buildPlayerItem(removedPlayer, animation, index),
+      );
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // remove focus node from list after setting state
+      _focusNodes.removeAt(index);
+    });
   }
 
   @override
@@ -95,8 +109,8 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
   void dispose() async {
     // save the player list to shared preferences
     // on dispose
-    SharedPreferences.getInstance().then(
-        (prefs) => prefs.setStringList('currentPlayersList', _currentPlayers));
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('currentPlayersList', _currentPlayers);
 
     super.dispose();
   }
@@ -106,17 +120,44 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     return DefaultScaffold(
       actionButton: FloatingActionButton(
         tooltip: AppLocalizations.of(context)!.currentPlayersPageAddPlayer,
-        onPressed: () => _addPlayer,
+        onPressed: _addPlayer,
         child: const Icon(Icons.add),
       ),
       child: LoaderWidget(
         loadFunc: _initPlayerList,
-        childFunc: () => AnimatedList(
-          key: _listKey,
-          initialItemCount: _currentPlayers.length,
-          itemBuilder: (context, index, animation) {
-            return _buildPlayerItem(_currentPlayers[index], animation, index);
+        childFunc: () => RawKeyboardListener(
+          focusNode: FocusNode(),
+          onKey: (event) {
+            if (event is RawKeyDownEvent) {
+              int currentIndex =
+                  _focusNodes.indexWhere((node) => node.hasFocus);
+              if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+                // Shift focus to the previous text field
+                if (currentIndex > 0) {
+                  FocusScope.of(context)
+                      .requestFocus(_focusNodes[currentIndex - 1]);
+                }
+              } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+                // Shift focus to the next text field
+                if (currentIndex < _focusNodes.length - 1) {
+                  FocusScope.of(context)
+                      .requestFocus(_focusNodes[currentIndex + 1]);
+                }
+              } else if (event.logicalKey == LogicalKeyboardKey.escape) {
+                // Remove the current text field
+                if (currentIndex != -1) {
+                  _removePlayer(currentIndex);
+                }
+              }
+            }
           },
+          child: AnimatedList(
+            key: _listKey,
+            initialItemCount: _currentPlayers.length,
+            itemBuilder: (context, index, animation) {
+              return _buildPlayerItem(_currentPlayers[index], animation, index);
+            },
+          ),
         ),
       ),
     );
