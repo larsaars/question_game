@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'louis_george_cafe',
         pageTransitionsTheme: PageTransitionsTheme(
           builders: {
-            for (final type in TargetPlatform.values)
+            for (var type in TargetPlatform.values)
               type: const FadeUpwardsPageTransitionsBuilder()
           },
         ),

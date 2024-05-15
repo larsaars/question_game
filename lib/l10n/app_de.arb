@@ -10,12 +10,5 @@
   "mainPageChooseCategories": "KATEGORIEN WÄHLEN",
 
   "currentPlayersPageAddPlayer": "Spieler hinzufügen",
-  "currentPlayersPagePlayerName": "Name",
-
-  "categoryQuestion": "Fragen",
-  "categoryPoll": "Abstimmungen",
-  "categoryChallenge": "Challenges",
-  "categoryBomb": "Bombe",
-  "categoryRule": "Regeln",
-  "categoryYesOrNo": "Ja oder Nein"
+  "currentPlayersPagePlayerName": "Name"
 }

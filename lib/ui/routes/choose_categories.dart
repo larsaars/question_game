@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/database/database_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 import 'package:question_game/ui/widgets/loader_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,32 +15,22 @@ class ChooseCategoriesPage extends StatefulWidget {
 }
 
 class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
-  late List? _items;
+  late final List _items = [];
   late AppLocalizations? loc;
 
   Future _initItems() async {
-    final loc = AppLocalizations.of(context);
+    // init prefs
     final prefs = await SharedPreferences.getInstance();
 
-    // and then init items as well
-    _items = [
-      {
-        'text': loc!.categoryQuestion,
-        'color': ui_defaults.colorCategoryQuestion
-      },
-      {'text': loc!.categoryPoll, 'color': ui_defaults.colorCategoryPoll},
-      {'text': loc!.categoryBomb, 'color': ui_defaults.colorCategoryBomb},
-      {'text': loc!.categoryYesOrNo, 'color': ui_defaults.colorCategoryYesOrNo},
-      {
-        'text': loc!.categoryChallenge,
-        'color': ui_defaults.colorCategoryChallenge
-      },
-      {'text': loc!.categoryRule, 'color': ui_defaults.colorCategoryRule},
-    ];
-
-    // load values from prefs
-    for (int i = 0; i < _items!.length; i++) {
-      _items![i]['checked'] = prefs.getBool('category_$i') ?? true;
+    // make list of categories from categories descriptor map
+    for (var categoryKey in DataBaseHandler.categoriesDescriptor.keys) {
+      final category = DataBaseHandler.categoriesDescriptor[categoryKey];
+      _items.add({
+        'text': category['name'],
+        'color': category['color'],
+        // set checked from pref value
+        'checked': prefs.getBool('category_$categoryKey') ?? true,
+      });
     }
   }
 
