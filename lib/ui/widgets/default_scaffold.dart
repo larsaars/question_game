@@ -101,7 +101,7 @@ class DefaultScaffold extends StatelessWidget {
                           return [
                                 PopupMenuItem<String>(
                                   value: 'about',
-                                  child: Text(loc!.defaultScaffoldAbout),
+                                  child: Text(loc.defaultScaffoldAbout),
                                 ),
                               ] +
                               // if PWA install is enabled, show install button

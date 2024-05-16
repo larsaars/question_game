@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pwa_install/pwa_install.dart';
 
 Color createRandomPastelBackgroundColor() {
   return Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0)

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/database/database_handler.dart';
-import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 import 'package:question_game/ui/widgets/loader_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,8 +22,8 @@ class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
     final prefs = await SharedPreferences.getInstance();
 
     // make list of categories from categories descriptor map
-    for (var categoryKey in DataBaseHandler.categoriesDescriptor.keys) {
-      final category = DataBaseHandler.categoriesDescriptor[categoryKey];
+    for (var categoryKey in DataBaseHandler().categoriesDescriptor.keys) {
+      final category = DataBaseHandler().categoriesDescriptor[categoryKey];
       _items.add({
         'text': category['name'],
         'color': category['color'],
@@ -41,9 +40,9 @@ class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
         loadFunc: _initItems,
         childFunc: () => ListView.builder(
           scrollDirection: Axis.vertical,
-          itemCount: _items?.length,
+          itemCount: _items.length,
           itemBuilder: (BuildContext context, int index) {
-            final item = _items?[index];
+            final item = _items[index];
             return CheckboxListTile(
                 checkColor: item['color'],
                 activeColor: item['color'],

@@ -8,22 +8,37 @@
   },
   "1": {
     "name": "Challenges",
-    "color": "#FFEB3B"
+    "color": "#FFEB3B",
+    "files": [
+      "challenges.txt"
+    ]
   },
   "2": {
     "name": "Abstimmungen",
-    "color": "#8BC34A"
+    "color": "#8BC34A",
+    "files": [
+      "polls.txt"
+    ]
   },
   "3": {
     "name": "Bombe",
-    "color": "#FFA726"
+    "color": "#FFA726",
+    "files": [
+      "bomb.txt"
+    ]
   },
   "4": {
     "name": "Ja oder Nein",
-    "color": "#03A9F4"
+    "color": "#03A9F4",
+    "files": [
+      "yesno.txt"
+    ]
   },
   "5": {
     "name": "Regeln",
-    "color": "#102027"
+    "color": "#102027",
+    "files": [
+      "rules.txt"
+    ]
   }
 }

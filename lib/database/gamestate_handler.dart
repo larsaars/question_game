@@ -1,6 +1,7 @@
 
 import 'package:question_game/database/gamestate.dart';
 
+/// used to save and load the game states
 class GameStateHandler {
   static final GameStateHandler _singleton = GameStateHandler._internal();
 

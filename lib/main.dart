@@ -13,7 +13,7 @@ Future<void> main() async {
   PWAInstall().setup(installCallback: () {
     debugPrint('APP INSTALLED!');
   });
-  // register licenses
+  // register licenses directly on start
   registerLicenses();
   // start app
   runApp(const MyApp());
