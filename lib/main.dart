@@ -5,7 +5,7 @@ import 'package:question_game/ui/routes/about.dart';
 import 'package:question_game/ui/routes/choose_categories.dart';
 import 'package:question_game/ui/routes/current_players.dart';
 import 'package:question_game/ui/routes/home_page.dart';
-import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
+import 'package:question_game/ui/ui_defaults.dart';
 
 Future<void> main() async {
   // Ensure Flutter binding is initialized
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: ui_defaults.colorPrimary),
+        colorScheme: ColorScheme.fromSeed(seedColor: UIDefaults.colorPrimary),
         iconTheme: const IconThemeData(
-          color: ui_defaults.colorDefaultIcon,
-          size: ui_defaults.defaultIconSize,
+          color: UIDefaults.colorDefaultIcon,
+          size: UIDefaults.defaultIconSize,
         ),
         useMaterial3: true,
         fontFamily: 'louis_george_cafe',

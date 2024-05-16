@@ -13,11 +13,11 @@ class CenteredTextIconButton extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.onPressed,
-    this.iconColor = colorDefaultIcon,
-    this.textColor = colorDefaultButtonText,
-    this.height = defaultButtonHeight,
-    this.iconSize = defaultIconSize,
-    this.textSidePadding = defaultButtonHeight,
+    this.iconColor = UIDefaults.colorDefaultIcon,
+    this.textColor = UIDefaults.colorDefaultButtonText,
+    this.height = UIDefaults.defaultButtonHeight,
+    this.iconSize = UIDefaults.defaultIconSize,
+    this.textSidePadding = UIDefaults.defaultButtonHeight,
   });
 
   @override

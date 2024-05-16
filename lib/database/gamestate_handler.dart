@@ -1,33 +1,36 @@
+import 'dart:convert';
 
 import 'package:question_game/database/gamestate.dart';
+import 'package:question_game/utils/base_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// used to save and load the game states
 class GameStateHandler {
-  static final GameStateHandler _singleton = GameStateHandler._internal();
+  static var _currentGameState = GameState();
 
-  factory GameStateHandler() {
-    return _singleton;
+  static get currentGameState => _currentGameState;
+
+  static GameState loadLatestGameState() {
+    final savedGameStates = getSavedGameStates();
+    if (savedGameStates.isNotEmpty) {
+      _currentGameState = savedGameStates.last;
+    }
+    return _currentGameState;
   }
 
-  GameStateHandler._internal();
-
-  GameState _currentGameState = GameState();
-
-  GameState get currentGameState => _currentGameState;
-
-  void saveGameState(GameState gameState) {
-    _currentGameState = gameState;
+  static int getSavedGameStatesCount() {
+    return BaseUtils.prefs?.getStringList('gameStates')?.length ?? 0;
   }
 
-  GameState loadLatestGameState() {
-    return GameState();
-  }
+  static List<GameState> getSavedGameStates() {
+    final gameStates = <GameState>[];
+    final savedGameStatesAsStringList =
+        BaseUtils.prefs?.getStringList('gameStates') ?? [];
 
-  int getSavedGameStatesCount() {
-    return 0;
-  }
+    for (final gameStateString in savedGameStatesAsStringList) {
+      gameStates.add(GameState.fromJson(jsonDecode(gameStateString)));
+    }
 
-  List<GameState> getSavedGameStates() {
-    return [];
+    return gameStates;
   }
 }

@@ -18,11 +18,11 @@ class GameState {
   int lastPlayed = 0;
 
   // list of player names
-  List<String> players = [];
+  List<String> players = [''];
 
   // categoryId -> line numbers played in that category
   Map<String, List<int>> questionsPlayed = {
-    for (var i = 0; i < DataBaseHandler().categoriesDescriptor.length; i++) i.toString(): []
+    for (var i = 0; i < DataBaseHandler.categoriesDescriptor.length; i++) i.toString(): []
   };
 
   // categories (ids) active

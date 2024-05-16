@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:question_game/ui/widgets/loader_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:question_game/database/gamestate_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/default_scaffold.dart';
@@ -16,14 +15,18 @@ class CurrentPlayersPage extends StatefulWidget {
 class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-  late List<String> _currentPlayers;
   List<FocusNode> _focusNodes = [];
 
-  Future _initPlayerList() async {
-    // load list from prefs
-    final prefs = await SharedPreferences.getInstance();
-    _currentPlayers = prefs.getStringList('currentPlayersList') ?? [];
-    // init focus nodes list
+  late List<String> _currentPlayers;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    // pass the reference of the list to the state
+    _currentPlayers = GameStateHandler.currentGameState.players;
+    // create a focus node for each player
     _focusNodes = List.generate(_currentPlayers.length, (_) => FocusNode());
   }
 
@@ -99,20 +102,6 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() async {
-    // save the player list to shared preferences
-    // on dispose
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('currentPlayersList', _currentPlayers);
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,9 +111,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
         onPressed: _addPlayer,
         child: const Icon(Icons.add),
       ),
-      child: LoaderWidget(
-        loadFunc: _initPlayerList,
-        childFunc: () => RawKeyboardListener(
+      child: RawKeyboardListener(
           focusNode: FocusNode(),
           onKey: (event) {
             if (event is RawKeyDownEvent) {
@@ -157,7 +144,6 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
               return _buildPlayerItem(_currentPlayers[index], animation, index);
             },
           ),
-        ),
       ),
     );
   }

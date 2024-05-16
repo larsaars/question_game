@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:question_game/ui/ui_defaults.dart';
 
 void showMyAboutDialog(BuildContext context) async {
   final loc = AppLocalizations.of(context); // strings
@@ -11,7 +11,7 @@ void showMyAboutDialog(BuildContext context) async {
     context: context,
     applicationIcon: Image.asset(
       'imgs/app_icon.png',
-      height: ui_defaults.defaultIconSize,
+      height: UIDefaults.defaultIconSize,
     ),
     applicationName: loc!.appTitle,
     applicationVersion: loc.appVersion,

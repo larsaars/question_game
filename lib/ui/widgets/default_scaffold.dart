@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pwa_install/pwa_install.dart';
 import 'package:question_game/ui/routes/about.dart';
-import 'package:question_game/ui/ui_defaults.dart' as ui_defaults;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/ui/ui_defaults.dart';
 
 // default scaffold as outermost widget to embed other widgets
 // contains a back button and a child widget
@@ -44,7 +44,7 @@ class DefaultScaffold extends StatelessWidget {
       // relative to size of screen
       return [
         screenWidth * 0.25,
-        max(screenHeight * 0.04, ui_defaults.defaultIconSize),
+        max(screenHeight * 0.04, UIDefaults.defaultIconSize),
         // ensure padding is at least as high as back button
       ];
     }
@@ -56,13 +56,13 @@ class DefaultScaffold extends StatelessWidget {
     final [horizontalPadding, verticalPadding] = _determinePadding(context);
 
     return Scaffold(
-      backgroundColor: ui_defaults.backgroundColor,
+      backgroundColor: UIDefaults.backgroundColor,
       body: Stack(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
               // ensure padding is at least as wide as the icon on the left
-              left: max(ui_defaults.defaultIconSize, horizontalPadding),
+              left: max(UIDefaults.defaultIconSize, horizontalPadding),
               right: horizontalPadding,
               top: verticalPadding,
               bottom: verticalPadding,
@@ -94,8 +94,8 @@ class DefaultScaffold extends StatelessWidget {
                       child: PopupMenuButton(
                         tooltip: loc!.appTitle,
                         offset: const Offset(
-                          ui_defaults.defaultIconSize / 2,
-                          ui_defaults.defaultIconSize / 2,
+                          UIDefaults.defaultIconSize / 2,
+                          UIDefaults.defaultIconSize / 2,
                         ),
                         itemBuilder: (BuildContext context) {
                           return [
@@ -123,7 +123,7 @@ class DefaultScaffold extends StatelessWidget {
                         },
                         icon: Image.asset(
                           'imgs/app_icon.png',
-                          height: ui_defaults.defaultIconSize,
+                          height: UIDefaults.defaultIconSize,
                         ),
                       ),
                     ),
