@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/utils/base_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -103,8 +104,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                 AppLocalizations.of(context)!.mainPageStartGame,
                             textColor: UIDefaults.colorPrimary,
                             iconColor: UIDefaults.colorPrimary,
-                            onPressed:
-                                () {}, // TODO below continue last game and play last game instance
+                            onPressed: () {
+                              // if there are no saved game states, start a new game
+                              if (GameStateHandler.getSavedGameStatesCount() ==
+                                  0) {
+                                Navigator.pushNamed(context, '/current-players');
+                              } else {
+                                // else go into game selection
+                                Navigator.pushNamed(context, '/game-selection');
+                              }
+                            },
                           ),
                           CenteredTextIconButton(
                             icon: Icons.category,

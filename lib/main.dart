@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pwa_install/pwa_install.dart';
 import 'package:question_game/ui/routes/about.dart';
-import 'package:question_game/ui/routes/choose_categories.dart';
-import 'package:question_game/ui/routes/current_players.dart';
+import 'package:question_game/ui/routes/choose_categories_page.dart';
+import 'package:question_game/ui/routes/current_players_page.dart';
+import 'package:question_game/ui/routes/game/main_game_page.dart';
+import 'package:question_game/ui/routes/game_selection/game_selection_page.dart';
 import 'package:question_game/ui/routes/home_page.dart';
+import 'package:question_game/ui/routes/game_selection/old_games_list_selection_page.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 
 Future<void> main() async {
@@ -44,7 +47,8 @@ class MyApp extends StatelessWidget {
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),  // floating action buttons are round
+            borderRadius: BorderRadius.circular(
+                50.0), // floating action buttons are round
           ),
         ),
       ),
@@ -52,6 +56,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MyHomePage(),
         '/categories': (context) => const ChooseCategoriesPage(),
         '/current-players': (context) => const CurrentPlayersPage(),
+        '/game-selection': (context) => const GameSelectionPage(),
+        '/old-games-list': (context) => const OldGamesListSelectionPage(),
+        '/game' : (context) => const MainGamePage(),
       },
     );
   }
