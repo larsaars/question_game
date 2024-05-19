@@ -1,4 +1,5 @@
 import 'package:question_game/database/database_handler.dart';
+import 'package:uuid/uuid.dart';
 
 /// Question class that holds the category id and the questionId
 class Question {
@@ -11,14 +12,15 @@ class Question {
 
 /// holds the state of the game
 class GameState {
-  // Constructor
-  GameState();
+
+  // unique game id
+  String gameId = '';
 
   // timestamp of when the game was played the last time
   int lastPlayed = 0;
 
   // list of player names
-  List<String> players = [''];
+  List<String> players = [];
 
   // categoryId -> line numbers played in that category
   Map<String, List<int>> questionsPlayed = {
@@ -71,9 +73,18 @@ class GameState {
     return question;
   }
 
+  // init as new game
+  GameState(this.categoriesActive) {
+    // create a new game with empty player name
+    players.add('');
+    // and a new game uuid
+    gameId = const Uuid().v4();
+  }
+
   // Convert GameState object to JSON
   Map<String, dynamic> toJson() {
     return {
+      'gameId': gameId,
       'lastPlayed': lastPlayed,
       'players': players,
       'questionsPlayed': questionsPlayed,
@@ -83,7 +94,8 @@ class GameState {
 
   // Create GameState object from JSON
   GameState.fromJson(Map<String, dynamic> json)
-      : lastPlayed = json['lastPlayed'],
+      : gameId = json['gameId'],
+        lastPlayed = json['lastPlayed'],
         players = List<String>.from(json['players']),
         questionsPlayed = json['questionsPlayed'],
         categoriesActive = json['categoriesActive'];

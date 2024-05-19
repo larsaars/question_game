@@ -24,8 +24,16 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
   void initState() {
     super.initState();
 
+    // if the current game state is null, pop the page
+    if (GameStateHandler.currentGameState == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pop(context);
+      });
+    }
+
     // pass the reference of the list to the state
-    _currentPlayers = GameStateHandler.currentGameState.players;
+    _currentPlayers = GameStateHandler.currentGameState?.players;
+
     // create a focus node for each player
     _focusNodes = List.generate(_currentPlayers.length, (_) => FocusNode());
   }

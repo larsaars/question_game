@@ -20,6 +20,7 @@ dependencies:
   flutter_launcher_icons: any
   shared_preferences: any
   pwa_install: any
+  uuid: ^4.2.2
 
 dev_dependencies:
   flutter_test:

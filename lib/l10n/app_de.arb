@@ -10,5 +10,9 @@
   "mainPageChooseCategories": "KATEGORIEN WÄHLEN",
 
   "currentPlayersPageAddPlayer": "Spieler hinzufügen",
-  "currentPlayersPagePlayerName": "Name"
+  "currentPlayersPagePlayerName": "Name",
+
+  "gameSelectionPageNewGame": "NEUES SPIEL",
+  "gameSelectionPageContinueLastGame": "LETZTES SPIEL FORTSETZEN",
+  "gameSelectionPageChooseOldGame": "ALTE SPIELE"
 }

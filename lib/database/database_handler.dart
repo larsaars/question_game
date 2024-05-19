@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:question_game/database/gamestate.dart';
+import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/utils/ui_utils.dart';
 
 /// Class that handles the database
@@ -10,23 +11,32 @@ import 'package:question_game/utils/ui_utils.dart';
 // this works under the assumption that the database is quite small
 // but since it is "only" text based, it should be fine ( < 1MB)
 class DataBaseHandler {
-
   // invoked on app start
   static Map<String, dynamic> categoriesDescriptor = {};
 
   static Future loadCategoriesDescriptor() async {
     // load the categories descriptor json file
-    String jsonString = await rootBundle.loadString('question_database/categories_descriptor.json');
+    String jsonString = await rootBundle
+        .loadString('question_database/categories_descriptor.json');
     categoriesDescriptor = jsonDecode(jsonString);
 
     // replace string colors to actual color objects
     for (final category in categoriesDescriptor.keys) {
-      categoriesDescriptor[category]['color'] = UIUtils.hexToColor(categoriesDescriptor[category]['color']);
+      categoriesDescriptor[category]['color'] =
+          UIUtils.hexToColor(categoriesDescriptor[category]['color']);
     }
   }
 
   /// loads the questions from the database that are to be played
-  static void prepareGameState(GameState state) async {
+  static Future prepareGameState() async {
+    // if the current game state is null, do nothing
+    if (GameStateHandler.currentGameState == null) {
+      return;
+    }
+
+    // get the current game state
+    final state = GameStateHandler.currentGameState!;
+
     // GOAL: load only the categories that are active
     // (whitelist approach: done by loading only the categories that are active)
     // as well as only the questions that have not been played yet

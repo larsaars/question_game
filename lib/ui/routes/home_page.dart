@@ -73,60 +73,55 @@ class _MyHomePageState extends State<MyHomePage> {
     // since it requires the context which is not available before
     _defaultTitleText ??= _titleText = AppLocalizations.of(context)!.appTitle;
     return DefaultScaffold(
-        backButton: false,
-        child: _loading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Stack(
-                children: [
-                  Center(
-                    child: IntrinsicWidth(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              _titleText,
-                              style: const TextStyle(
-                                fontSize: 64,
-                                fontFamily: 'alte_haas_grotesk',
-                                fontWeight: FontWeight.w700,
-                                color: UIDefaults.colorPrimary,
-                              ),
-                            ),
-                          ),
-                          CenteredTextIconButton(
-                            icon: Icons.videogame_asset,
-                            text:
-                                AppLocalizations.of(context)!.mainPageStartGame,
-                            textColor: UIDefaults.colorPrimary,
-                            iconColor: UIDefaults.colorPrimary,
-                            onPressed: () {
-                              // if there are no saved game states, start a new game
-                              if (GameStateHandler.getSavedGameStatesCount() ==
-                                  0) {
-                                Navigator.pushNamed(context, '/current-players');
-                              } else {
-                                // else go into game selection
-                                Navigator.pushNamed(context, '/game-selection');
-                              }
-                            },
-                          ),
-                          CenteredTextIconButton(
-                            icon: Icons.category,
-                            text: AppLocalizations.of(context)!
-                                .mainPageChooseCategories,
-                            onPressed: () =>
-                                Navigator.pushNamed(context, '/categories'),
-                          ),
-                        ],
+      backButton: false,
+      child: _loading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Center(
+              child: IntrinsicWidth(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        _titleText,
+                        style: const TextStyle(
+                          fontSize: 64,
+                          fontFamily: 'alte_haas_grotesk',
+                          fontWeight: FontWeight.w700,
+                          color: UIDefaults.colorPrimary,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ));
+                    CenteredTextIconButton(
+                      icon: Icons.videogame_asset,
+                      text: AppLocalizations.of(context)!.mainPageStartGame,
+                      textColor: UIDefaults.colorPrimary,
+                      iconColor: UIDefaults.colorPrimary,
+                      onPressed: () {
+                        // if there are no saved game states, start a new game
+                        if (GameStateHandler.getSavedGameStatesCount() == 0) {
+                          Navigator.pushNamed(context, '/current-players');
+                        } else {
+                          // else go into game selection
+                          Navigator.pushNamed(context, '/game-selection');
+                        }
+                      },
+                    ),
+                    CenteredTextIconButton(
+                      icon: Icons.category,
+                      text: AppLocalizations.of(context)!
+                          .mainPageChooseCategories,
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/categories'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+    );
   }
 }
