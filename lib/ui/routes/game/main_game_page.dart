@@ -41,6 +41,7 @@ class _MainGamePageState extends State<MainGamePage> {
     super.dispose();
   }
 
+  // TODO error with the hero widget
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(

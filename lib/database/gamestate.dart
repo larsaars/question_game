@@ -12,7 +12,6 @@ class Question {
 
 /// holds the state of the game
 class GameState {
-
   // unique game id
   String gameId = '';
 
@@ -23,9 +22,7 @@ class GameState {
   List<String> players = [];
 
   // categoryId -> line numbers played in that category
-  Map<String, List<int>> questionsPlayed = {
-    for (var i = 0; i < DataBaseHandler.categoriesDescriptor.length; i++) i.toString(): []
-  };
+  Map<String, List<int>> questionsPlayed = {};
 
   // categories (ids) active
   List<String> categoriesActive = [];
@@ -79,9 +76,17 @@ class GameState {
     players.add('');
     // and a new game uuid
     gameId = const Uuid().v4();
+    // create an empty map for the questions played
+    questionsPlayed = {
+      for (var i = 0; i < DataBaseHandler.categoriesDescriptor.length; i++)
+        i.toString(): []
+    };
   }
 
+  // TODO parsing to and form json not correctly
   // Convert GameState object to JSON
+  // note: the questions that have been loaded
+  // from the database will not be saved!
   Map<String, dynamic> toJson() {
     return {
       'gameId': gameId,
@@ -98,5 +103,12 @@ class GameState {
         lastPlayed = json['lastPlayed'],
         players = List<String>.from(json['players']),
         questionsPlayed = json['questionsPlayed'],
-        categoriesActive = json['categoriesActive'];
+        categoriesActive = json['categoriesActive'] {
+    // Manually parse the questionsPlayed map
+    questionsPlayed = Map<String, List<int>>.from(
+      json['questionsPlayed'].map(
+        (key, value) => MapEntry(key, List<int>.from(value)),
+      ),
+    );
+  }
 }

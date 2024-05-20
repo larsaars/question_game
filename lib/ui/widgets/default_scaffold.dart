@@ -11,12 +11,16 @@ import 'package:question_game/ui/ui_defaults.dart';
 class DefaultScaffold extends StatelessWidget {
   final Widget child;
   final Widget? actionButton;
+  final String? title;
   final bool backButton;
+  final bool cutAtActionButton;
 
   const DefaultScaffold({
     super.key,
     required this.child,
+    this.title,
     this.backButton = true,
+    this.cutAtActionButton = true,
     this.actionButton,
   });
 
@@ -68,11 +72,32 @@ class DefaultScaffold extends StatelessWidget {
               bottom: verticalPadding,
             ),
             child: Stack(children: <Widget>[
-              child,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (title != null)
+                    Text(
+                      title!,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: UIDefaults.colorPrimary,
+                          ),
+                    ),
+                  Expanded(
+                    child: child,
+                  ),
+                  if (cutAtActionButton)
+                    const SizedBox(
+                      height: 58.0,
+                    )
+                ],
+              ),
               if (actionButton != null)
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: actionButton,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: actionButton,
+                  ),
                 ),
             ]),
           ),
@@ -99,20 +124,17 @@ class DefaultScaffold extends StatelessWidget {
                         ),
                         itemBuilder: (BuildContext context) {
                           return [
-                                PopupMenuItem<String>(
-                                  value: 'about',
-                                  child: Text(loc.defaultScaffoldAbout),
-                                ),
-                              ] +
-                              // if PWA install is enabled, show install button
-                              (PWAInstall().installPromptEnabled
-                                  ? [
-                                      PopupMenuItem<String>(
-                                        value: 'install',
-                                        child: Text(loc.defaultScaffoldInstall),
-                                      ),
-                                    ]
-                                  : []);
+                            PopupMenuItem<String>(
+                              value: 'about',
+                              child: Text(loc.defaultScaffoldAbout),
+                            ),
+                            // if PWA install is enabled, show install button
+                            if (PWAInstall().installPromptEnabled)
+                              PopupMenuItem<String>(
+                                value: 'install',
+                                child: Text(loc.defaultScaffoldInstall),
+                              ),
+                          ];
                         },
                         onSelected: (String value) {
                           if (value == 'about') {

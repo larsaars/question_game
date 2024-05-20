@@ -21,6 +21,7 @@ dependencies:
   shared_preferences: any
   pwa_install: any
   uuid: ^4.2.2
+  timeago: ^3.6.1
 
 dev_dependencies:
   flutter_test:

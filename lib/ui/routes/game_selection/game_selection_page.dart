@@ -31,7 +31,7 @@ class GameSelectionPage extends StatelessWidget {
                   // load new game state and then navigate to
                   // enter the player names
                   GameStateHandler.playNewGame();
-                  Navigator.pushNamed(context, '/current-players');
+                  Navigator.pushReplacementNamed(context, '/current-players');
                 },
               ),
               CenteredTextIconButton(
@@ -40,7 +40,7 @@ class GameSelectionPage extends StatelessWidget {
                 onPressed: () {
                   // load last game state and then navigate to game
                   GameStateHandler.playLastGame();
-                  Navigator.pushNamed(context, '/game');
+                  Navigator.pushReplacementNamed(context, '/game');
                 },
               ),
               if (hasMoreThanOneSavedGameStates)
@@ -48,7 +48,7 @@ class GameSelectionPage extends StatelessWidget {
                   icon: Icons.list,
                   text: loc.gameSelectionPageChooseOldGame,
                   onPressed: () =>
-                      Navigator.pushNamed(context, '/old-games-list'),
+                      Navigator.pushReplacementNamed(context, '/old-games-list'),
                 ),
             ],
           ),

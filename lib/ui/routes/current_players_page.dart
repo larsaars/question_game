@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/ui/ui_defaults.dart';
 
 import '../widgets/default_scaffold.dart';
 
@@ -15,10 +16,10 @@ class CurrentPlayersPage extends StatefulWidget {
 class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+  final _scrollController = ScrollController();
   List<FocusNode> _focusNodes = [];
 
   late List<String> _currentPlayers;
-
 
   @override
   void initState() {
@@ -32,7 +33,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     }
 
     // pass the reference of the list to the state
-    _currentPlayers = GameStateHandler.currentGameState?.players;
+    _currentPlayers = GameStateHandler.currentGameState?.players ?? [];
 
     // create a focus node for each player
     _focusNodes = List.generate(_currentPlayers.length, (_) => FocusNode());
@@ -86,8 +87,14 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
       _listKey.currentState!.insertItem(_currentPlayers.length - 1);
     });
 
-    // focus the new text field after it has been built
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // scroll to bottom of list view
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 50),
+        curve: Curves.fastOutSlowIn,
+      );
+      // and focus the new text field after it has been built
       FocusScope.of(context).requestFocus(_focusNodes.last);
     });
   }
@@ -110,48 +117,64 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+
     return DefaultScaffold(
-      actionButton: FloatingActionButton(
-        tooltip: AppLocalizations.of(context)!.currentPlayersPageAddPlayer,
-        onPressed: _addPlayer,
-        child: const Icon(Icons.add),
+      title: loc!.currentPlayersPageTitle,
+      actionButton: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            tooltip: loc!.currentPlayersPageButtonAddPlayer,
+            onPressed: _addPlayer,
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(
+            width: 8.0,
+          ),
+          FloatingActionButton(
+            backgroundColor: UIDefaults.colorYes,
+            tooltip: loc.currentPlayersPageButtonDoneAdding,
+            onPressed: () => Navigator.pushReplacementNamed(context, '/game'),
+            child: const Icon(Icons.done),
+          )
+        ],
       ),
       child: RawKeyboardListener(
-          focusNode: FocusNode(),
-          onKey: (event) {
-            if (event is RawKeyDownEvent) {
-              int currentIndex =
-                  _focusNodes.indexWhere((node) => node.hasFocus);
-              if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
-                // Shift focus to the previous text field
-                if (currentIndex > 0) {
-                  FocusScope.of(context)
-                      .requestFocus(_focusNodes[currentIndex - 1]);
-                }
-              } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-                // Shift focus to the next text field
-                if (currentIndex < _focusNodes.length - 1) {
-                  FocusScope.of(context)
-                      .requestFocus(_focusNodes[currentIndex + 1]);
-                }
-              } else if (event.logicalKey == LogicalKeyboardKey.escape) {
-                // Remove the current text field
-                if (currentIndex != -1) {
-                  _removePlayer(currentIndex);
-                }
+        focusNode: FocusNode(),
+        onKey: (event) {
+          if (event is RawKeyDownEvent) {
+            int currentIndex = _focusNodes.indexWhere((node) => node.hasFocus);
+            if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+              // Shift focus to the previous text field
+              if (currentIndex > 0) {
+                FocusScope.of(context)
+                    .requestFocus(_focusNodes[currentIndex - 1]);
+              }
+            } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+              // Shift focus to the next text field
+              if (currentIndex < _focusNodes.length - 1) {
+                FocusScope.of(context)
+                    .requestFocus(_focusNodes[currentIndex + 1]);
+              }
+            } else if (event.logicalKey == LogicalKeyboardKey.escape) {
+              // Remove the current text field
+              if (currentIndex != -1) {
+                _removePlayer(currentIndex);
               }
             }
+          }
+        },
+        child: AnimatedList(
+          key: _listKey,
+          controller: _scrollController,
+          initialItemCount: _currentPlayers.length,
+          itemBuilder: (context, index, animation) {
+            return _buildPlayerItem(_currentPlayers[index], animation, index);
           },
-          child: AnimatedList(
-            key: _listKey,
-            initialItemCount: _currentPlayers.length,
-            itemBuilder: (context, index, animation) {
-              return _buildPlayerItem(_currentPlayers[index], animation, index);
-            },
-          ),
+        ),
       ),
     );
   }

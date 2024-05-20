@@ -41,6 +41,9 @@ class GameStateHandler {
       return;
     }
 
+    // add the current time stamp to the game state
+    currentGameState!.lastPlayed = DateTime.now().millisecondsSinceEpoch;
+
     // load all old game states
     final savedGameStates = getSavedGameStates();
 
@@ -56,8 +59,7 @@ class GameStateHandler {
   }
 
   static int getSavedGameStatesCount() {
-    // return BaseUtils.prefs?.getStringList('gameStates')?.length ?? 0;
-    return 1;
+    return BaseUtils.prefs?.getStringList('gameStates')?.length ?? 0;
   }
 
   /// loads the game states from the shared preferences

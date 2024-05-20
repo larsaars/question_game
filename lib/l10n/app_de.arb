@@ -9,7 +9,9 @@
   "mainPageStartGame": "SPIELEN",
   "mainPageChooseCategories": "KATEGORIEN WÄHLEN",
 
-  "currentPlayersPageAddPlayer": "Spieler hinzufügen",
+  "currentPlayersPageTitle": "Spieler hinzufügen",
+  "currentPlayersPageButtonAddPlayer": "Spieler hinzufügen",
+  "currentPlayersPageButtonDoneAdding": "Fertig",
   "currentPlayersPagePlayerName": "Name",
 
   "gameSelectionPageNewGame": "NEUES SPIEL",
