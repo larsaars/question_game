@@ -44,6 +44,7 @@ class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
+      title: AppLocalizations.of(context)!.chooseCategoriesPageTitle,
         child: _loading
             ? const Center(child: CircularProgressIndicator())
             : ListView.builder(

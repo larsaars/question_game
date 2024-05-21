@@ -123,11 +123,13 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
 
     return DefaultScaffold(
       title: loc!.currentPlayersPageTitle,
+      cutOffAtActionButton: true,
       actionButton: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
-            tooltip: loc!.currentPlayersPageButtonAddPlayer,
+            heroTag: 'addPlayer',
+            tooltip: loc.currentPlayersPageButtonAddPlayer,
             onPressed: _addPlayer,
             child: const Icon(Icons.add),
           ),
@@ -135,6 +137,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
             width: 8.0,
           ),
           FloatingActionButton(
+            heroTag: 'doneAdding',
             backgroundColor: UIDefaults.colorYes,
             tooltip: loc.currentPlayersPageButtonDoneAdding,
             onPressed: () => Navigator.pushReplacementNamed(context, '/game'),

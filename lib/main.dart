@@ -9,6 +9,7 @@ import 'package:question_game/ui/routes/game_selection/game_selection_page.dart'
 import 'package:question_game/ui/routes/home_page.dart';
 import 'package:question_game/ui/routes/game_selection/old_games_list_selection_page.dart';
 import 'package:question_game/ui/ui_defaults.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 Future<void> main() async {
   // Ensure Flutter binding is initialized
@@ -20,6 +21,9 @@ Future<void> main() async {
   registerLicenses();
   // start app
   runApp(const MyApp());
+
+  // add locales for timeago
+  timeago.setLocaleMessages('de', timeago.DeMessages());
 }
 
 class MyApp extends StatelessWidget {

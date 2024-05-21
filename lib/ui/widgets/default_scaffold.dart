@@ -9,18 +9,24 @@ import 'package:question_game/ui/ui_defaults.dart';
 // default scaffold as outermost widget to embed other widgets
 // contains a back button and a child widget
 class DefaultScaffold extends StatelessWidget {
+  // child widget to be displayed in the scaffold
   final Widget child;
+  // action button to be displayed in the bottom right corner (null if none)
   final Widget? actionButton;
+  // title of the scaffold
   final String? title;
+  // if is back button or app icon with dropdown menu
   final bool backButton;
-  final bool cutAtActionButton;
+  // if view should be cut off at the action button
+  // or if the action buttons float over the view
+  final bool cutOffAtActionButton;
 
   const DefaultScaffold({
     super.key,
     required this.child,
     this.title,
     this.backButton = true,
-    this.cutAtActionButton = true,
+    this.cutOffAtActionButton = false,
     this.actionButton,
   });
 
@@ -41,13 +47,13 @@ class DefaultScaffold extends StatelessWidget {
     final screenHeight = mediaQuery.size.height;
 
     // if is a small screen, set no padding
-    if (screenWidth < 600) {
+    if (screenWidth < 820) {
       return [0.0, 0.0];
     } else {
       // if is a large screen, set padding
       // relative to size of screen
       return [
-        screenWidth * 0.25,
+        screenWidth * 0.24,
         max(screenHeight * 0.04, UIDefaults.defaultIconSize),
         // ensure padding is at least as high as back button
       ];
@@ -76,16 +82,19 @@ class DefaultScaffold extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (title != null)
-                    Text(
-                      title!,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: UIDefaults.colorPrimary,
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        title!,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: UIDefaults.colorPrimary,
+                            ),
+                      ),
                     ),
                   Expanded(
                     child: child,
                   ),
-                  if (cutAtActionButton)
+                  if (cutOffAtActionButton)
                     const SizedBox(
                       height: 58.0,
                     )

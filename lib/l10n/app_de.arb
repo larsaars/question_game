@@ -9,6 +9,8 @@
   "mainPageStartGame": "SPIELEN",
   "mainPageChooseCategories": "KATEGORIEN WÄHLEN",
 
+  "chooseCategoriesPageTitle": "Kategorien wählen",
+
   "currentPlayersPageTitle": "Spieler hinzufügen",
   "currentPlayersPageButtonAddPlayer": "Spieler hinzufügen",
   "currentPlayersPageButtonDoneAdding": "Fertig",
@@ -16,5 +18,7 @@
 
   "gameSelectionPageNewGame": "NEUES SPIEL",
   "gameSelectionPageContinueLastGame": "LETZTES SPIEL FORTSETZEN",
-  "gameSelectionPageChooseOldGame": "ALTE SPIELE"
+  "gameSelectionPageChooseOldGame": "ALTE SPIELE",
+
+  "oldGamesListSelectionPageTitle": "Alte Spiele"
 }

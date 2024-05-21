@@ -46,14 +46,13 @@ class CenteredTextIconButton extends StatelessWidget {
                     SizedBox(
                       width: textSidePadding,
                     ),
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .fontSize,
-                        color: textColor,
+                    Flexible(
+                      child: Text(
+                        text,
+                        style:
+                            Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                  color: textColor,
+                                ),
                       ),
                     ),
                     SizedBox(

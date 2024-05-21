@@ -83,7 +83,6 @@ class GameState {
     };
   }
 
-  // TODO parsing to and form json not correctly
   // Convert GameState object to JSON
   // note: the questions that have been loaded
   // from the database will not be saved!
@@ -102,12 +101,11 @@ class GameState {
       : gameId = json['gameId'],
         lastPlayed = json['lastPlayed'],
         players = List<String>.from(json['players']),
-        questionsPlayed = json['questionsPlayed'],
-        categoriesActive = json['categoriesActive'] {
+        categoriesActive = List<String>.from(json['categoriesActive']) {
     // Manually parse the questionsPlayed map
     questionsPlayed = Map<String, List<int>>.from(
       json['questionsPlayed'].map(
-        (key, value) => MapEntry(key, List<int>.from(value)),
+        (key, value) => MapEntry(key, List<int>.from(value.cast<int>())),
       ),
     );
   }

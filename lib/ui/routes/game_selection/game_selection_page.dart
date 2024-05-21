@@ -31,7 +31,7 @@ class GameSelectionPage extends StatelessWidget {
                   // load new game state and then navigate to
                   // enter the player names
                   GameStateHandler.playNewGame();
-                  Navigator.pushReplacementNamed(context, '/current-players');
+                  Navigator.pushNamed(context, '/current-players');
                 },
               ),
               CenteredTextIconButton(
@@ -48,7 +48,7 @@ class GameSelectionPage extends StatelessWidget {
                   icon: Icons.list,
                   text: loc.gameSelectionPageChooseOldGame,
                   onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/old-games-list'),
+                      Navigator.pushNamed(context, '/old-games-list'),
                 ),
             ],
           ),
