@@ -15,7 +15,7 @@ class CurrentPlayersPage extends StatefulWidget {
 
 class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     with SingleTickerProviderStateMixin {
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+  final _listKey = GlobalKey<AnimatedListState>();
   final _scrollController = ScrollController();
   List<FocusNode> _focusNodes = [];
 
@@ -37,10 +37,15 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
 
     // create a focus node for each player
     _focusNodes = List.generate(_currentPlayers.length, (_) => FocusNode());
+
+    // focus first text field after build
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focusNodes.first);
+    });
   }
 
-  Widget _buildPlayerItem(
-      String player, Animation<double> animation, int index) {
+  Widget _buildPlayerItem(String player, Animation<double> animation,
+      int index) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(-1, 0),
@@ -52,7 +57,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
           focusNode: _focusNodes[index],
           decoration: InputDecoration(
             hintText:
-                AppLocalizations.of(context)!.currentPlayersPagePlayerName,
+            AppLocalizations.of(context)!.currentPlayersPagePlayerName,
             border: InputBorder.none,
           ),
           onSubmitted: (value) {
@@ -101,12 +106,12 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
 
   void _removePlayer(int index) {
     setState(() {
-      String removedPlayer =
-          _currentPlayers.removeAt(index); // remove from list
+      // remove from list
+      final removedPlayer = _currentPlayers.removeAt(index);
       // remove from animated list after removing from list
       _listKey.currentState!.removeItem(
         index,
-        (context, animation) =>
+            (context, animation) =>
             _buildPlayerItem(removedPlayer, animation, index),
       );
     });
@@ -140,7 +145,10 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
             heroTag: 'doneAdding',
             backgroundColor: UIDefaults.colorYes,
             tooltip: loc.currentPlayersPageButtonDoneAdding,
-            onPressed: () => Navigator.pushReplacementNamed(context, '/game'),
+            onPressed: () {
+              // kill this route, go to the game
+              Navigator.pushReplacementNamed(context, '/game');
+            },
             child: const Icon(Icons.done),
           )
         ],

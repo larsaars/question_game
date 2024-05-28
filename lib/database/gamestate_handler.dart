@@ -52,9 +52,15 @@ class GameStateHandler {
     // add the current game state
     savedGameStates.add(currentGameState!);
     // save the game states
+    saveGameStateList(savedGameStates);
+  }
+
+  /// save the game states to the shared preferences
+  /// overwrites whole list
+  static void saveGameStateList(List<GameState> gameStates) {
     BaseUtils.prefs?.setStringList(
       'gameStates',
-      savedGameStates.map((e) => jsonEncode(e.toJson())).toList(),
+      gameStates.map((e) => jsonEncode(e.toJson())).toList(),
     );
   }
 
