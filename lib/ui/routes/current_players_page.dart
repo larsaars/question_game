@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/ui_defaults.dart';
+import 'package:question_game/utils/navigation_utils.dart';
 
 import '../widgets/default_scaffold.dart';
 
@@ -18,6 +19,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
   final _listKey = GlobalKey<AnimatedListState>();
   final _scrollController = ScrollController();
   List<FocusNode> _focusNodes = [];
+  late String _comingFromRoute;
 
   late List<String> _currentPlayers;
 
@@ -38,14 +40,19 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     // create a focus node for each player
     _focusNodes = List.generate(_currentPlayers.length, (_) => FocusNode());
 
-    // focus first text field after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // focus first text field after build
       FocusScope.of(context).requestFocus(_focusNodes.first);
+      // when the page is built, we always pass an argument where we come from
+      // this is important for the navigation
+      final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      _comingFromRoute = args['comingFrom'];
     });
   }
 
-  Widget _buildPlayerItem(String player, Animation<double> animation,
-      int index) {
+  Widget _buildPlayerItem(
+      String player, Animation<double> animation, int index) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(-1, 0),
@@ -57,7 +64,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
           focusNode: _focusNodes[index],
           decoration: InputDecoration(
             hintText:
-            AppLocalizations.of(context)!.currentPlayersPagePlayerName,
+                AppLocalizations.of(context)!.currentPlayersPagePlayerName,
             border: InputBorder.none,
           ),
           onSubmitted: (value) {
@@ -111,7 +118,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
       // remove from animated list after removing from list
       _listKey.currentState!.removeItem(
         index,
-            (context, animation) =>
+        (context, animation) =>
             _buildPlayerItem(removedPlayer, animation, index),
       );
     });
@@ -120,6 +127,24 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
       // remove focus node from list after setting state
       _focusNodes.removeAt(index);
     });
+  }
+
+  void _doneAddingPressed() {
+    // the done adding button is pressed
+    // depending on where we come from, navigate to the correct route
+
+    // coming from the game selection page to create a new game
+    // or coming here directly from home page since there is no saved game state
+    // so navigate to the game
+    // and pop all routes until the main route
+    if (_comingFromRoute == 'game-selection' ||
+        _comingFromRoute == 'home-page') {
+      NavigationUtils.pushNamedAndPopTillMain(context, '/game');
+      // coming here from the main game to edit players list
+      // so only pop page to get back
+    } else if (_comingFromRoute == 'main-game') {
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -145,10 +170,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
             heroTag: 'doneAdding',
             backgroundColor: UIDefaults.colorYes,
             tooltip: loc.currentPlayersPageButtonDoneAdding,
-            onPressed: () {
-              // kill this route, go to the game
-              Navigator.pushReplacementNamed(context, '/game');
-            },
+            onPressed: _doneAddingPressed,
             child: const Icon(Icons.done),
           )
         ],

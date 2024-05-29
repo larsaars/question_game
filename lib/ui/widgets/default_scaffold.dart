@@ -13,6 +13,11 @@ class DefaultScaffold extends StatelessWidget {
   final Widget child;
   // action button to be displayed in the bottom right corner (null if none)
   final Widget? actionButton;
+  // widget that can be displayed on the top right corner
+  // on the same height as the back button
+  final Widget? topRightWidget;
+  // (gets padding of one default icon size per default)
+  final double topRightWidgetWidth;
   // title of the scaffold
   final String? title;
   // if is back button or app icon with dropdown menu
@@ -28,6 +33,8 @@ class DefaultScaffold extends StatelessWidget {
     this.backButton = true,
     this.cutOffAtActionButton = false,
     this.actionButton,
+    this.topRightWidget,
+    this.topRightWidgetWidth = UIDefaults.defaultIconSize,
   });
 
   // prompt installing as PWA if is enabled
@@ -69,11 +76,11 @@ class DefaultScaffold extends StatelessWidget {
       backgroundColor: UIDefaults.backgroundColor,
       body: Stack(
         children: <Widget>[
-          Padding(
+          Padding( // content in padding with fab
             padding: EdgeInsets.only(
               // ensure padding is at least as wide as the icon on the left
               left: max(UIDefaults.defaultIconSize, horizontalPadding),
-              right: horizontalPadding,
+              right: max(topRightWidget == null ? 0 : topRightWidgetWidth, horizontalPadding),
               top: verticalPadding,
               bottom: verticalPadding,
             ),
@@ -110,7 +117,7 @@ class DefaultScaffold extends StatelessWidget {
                 ),
             ]),
           ),
-          Align(
+          Align( // align with back button top left
             alignment: Alignment.topLeft,
             child: Hero(
               tag: 'default-scaffold-button',
@@ -160,6 +167,11 @@ class DefaultScaffold extends StatelessWidget {
                     ),
             ),
           ),
+          if (topRightWidget != null)
+            Align( // align with top right widget
+              alignment: Alignment.topRight,
+              child: topRightWidget!,
+            ),
         ],
       ),
     );

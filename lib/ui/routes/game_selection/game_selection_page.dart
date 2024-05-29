@@ -3,6 +3,7 @@ import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/widgets/centered_text_icon_button.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/utils/navigation_utils.dart';
 
 import '../../ui_defaults.dart';
 
@@ -31,7 +32,9 @@ class GameSelectionPage extends StatelessWidget {
                   // load new game state and then navigate to
                   // enter the player names
                   GameStateHandler.playNewGame();
-                  Navigator.pushNamed(context, '/current-players');
+                  Navigator.pushNamed(context, '/current-players', arguments: {
+                    'comingFrom': 'game-selection'
+                  });
                 },
               ),
               CenteredTextIconButton(
@@ -40,7 +43,7 @@ class GameSelectionPage extends StatelessWidget {
                 onPressed: () {
                   // load last game state and then navigate to game
                   GameStateHandler.playLastGame();
-                  Navigator.pushReplacementNamed(context, '/game');
+                  NavigationUtils.pushNamedAndPopTillMain(context, '/game');
                 },
               ),
               if (hasMoreThanOneSavedGameStates)

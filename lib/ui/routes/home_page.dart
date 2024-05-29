@@ -105,7 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         // if there are no saved game states, start a new game
                         if (GameStateHandler.getSavedGameStatesCount() == 0) {
                           GameStateHandler.playNewGame();
-                          Navigator.pushNamed(context, '/current-players');
+                          Navigator.pushNamed(context, '/current-players', arguments: {
+                            'comingFrom': 'home-page'
+                          });
                         } else {
                           // else go into game selection
                           Navigator.pushNamed(context, '/game-selection');

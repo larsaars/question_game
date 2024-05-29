@@ -3,10 +3,13 @@ import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/utils/navigation_utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../database/gamestate.dart';
 
+// TODO make list here more like in game freitags!
+// TODO with active categories and players and number of played questions
 class OldGamesListSelectionPage extends StatefulWidget {
   const OldGamesListSelectionPage({super.key});
 
@@ -102,7 +105,7 @@ class _OldGamesListSelectionPageState extends State<OldGamesListSelectionPage>
           // load the game state
           GameStateHandler.playOldGame(gameState);
           // navigate to the main game page
-          Navigator.pushReplacementNamed(context, '/game');
+          NavigationUtils.pushNamedAndPopTillMain(context, '/game');
         },
         trailing: IconButton(
           icon: const Icon(Icons.delete),

@@ -28,6 +28,9 @@ class _MainGamePageState extends State<MainGamePage> {
     // and then set the loading to false
     DataBaseHandler.prepareGameState().then((_) {
       setState(() {
+        // load the first question to show
+        _nextQuestion();
+        // set loading circle to disappear
         _loading = false;
       });
     });
@@ -41,12 +44,43 @@ class _MainGamePageState extends State<MainGamePage> {
     super.dispose();
   }
 
+  void _nextQuestion() {
+    // get the next question
+    final question = GameStateHandler.currentGameState?.next();
+    // if there is no question, the game is over
+    if (question == null) {
+      // pop the page, saving is done on dispose automatically
+      // Navigator.pop(context);
+    } else {
+      //  question is available, handle depending on the category id
+      // TODO standard aufforderung is heb die hand statt trink
+    }
+  }
+
+  void _editPlayerList() {
+    // navigate to the current players page
+    // and declare that it is coming from the main game
+    // (this is important for navigation)
+    Navigator.pushNamed(context, '/current-players', arguments: {
+      'comingFrom': 'main-game',
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultScaffold(
-      child: _loading
-          ? const Center(child: CircularProgressIndicator())
-          : const SizedBox(),
+    return GestureDetector(
+      onTap: _nextQuestion,
+      child: DefaultScaffold(
+        topRightWidget: IconButton(
+          icon: const Icon(Icons.edit_note),
+          onPressed: _editPlayerList,
+        ),
+        child: _loading
+            ? const Center(child: CircularProgressIndicator())
+            : const Column(
+                children: [],
+              ),
+      ),
     );
   }
 }
