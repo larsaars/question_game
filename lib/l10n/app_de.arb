@@ -12,7 +12,7 @@
   "chooseCategoriesPageTitle": "Kategorien auswählen",
 
   "currentPlayersPageTitle": "Spieler hinzufügen",
-  "currentPlayersPageButtonAddPlayer": "Spieler hinzufügen",
+  "currentPlayersPageButtonAddPlayer": "Spieler*innen hinzufügen",
   "currentPlayersPageButtonDoneAdding": "Fertig",
   "currentPlayersPagePlayerName": "Name",
 
@@ -20,5 +20,7 @@
   "gameSelectionPageContinueLastGame": "LETZTES SPIEL FORTSETZEN",
   "gameSelectionPageChooseOldGame": "ALTE SPIELE",
 
-  "oldGamesListSelectionPageTitle": "Alte Spiele"
+  "oldGamesListSelectionPageTitle": "Alte Spiele",
+  "oldGamesListSelectionPageMorePlayers": "weitere Spieler*innen",
+  "oldGamesListSelectionPageQuestionsPlayed": "gepielte Fragen"
 }
