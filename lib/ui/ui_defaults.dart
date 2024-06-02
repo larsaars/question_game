@@ -14,4 +14,6 @@ class UIDefaults {
 
   static const defaultIconSize = 36.0,
       defaultButtonHeight = 48.0;
+
+  static const gameRequestPlayerActionTextSize = 60.0;
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:question_game/database/database_handler.dart';
 import 'package:question_game/database/gamestate_handler.dart';
+import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../database/gamestate.dart';
 
 class MainGamePage extends StatefulWidget {
   const MainGamePage({super.key});
@@ -12,6 +16,9 @@ class MainGamePage extends StatefulWidget {
 
 class _MainGamePageState extends State<MainGamePage> {
   bool _loading = true;
+
+  AppLocalizations? localizations;
+  Question? currentQuestion;
 
   @override
   void initState() {
@@ -46,14 +53,30 @@ class _MainGamePageState extends State<MainGamePage> {
 
   void _nextQuestion() {
     // get the next question
-    final question = GameStateHandler.currentGameState?.next();
+    currentQuestion = GameStateHandler.currentGameState?.next();
     // if there is no question, the game is over
-    if (question == null) {
+    if (currentQuestion == null) {
       // pop the page, saving is done on dispose automatically
       // Navigator.pop(context);
     } else {
       //  question is available, handle depending on the category id
       // TODO standard aufforderung is heb die hand statt trink
+      switch (currentQuestion!.categoryId) {
+        case '1': // default question
+          break;
+        case '2': // challenge
+          break;
+        case '3': // poll
+          break;
+        case '4': // bomb
+          break;
+        case '5': // yes or no
+          break;
+        case '6': // rule
+          break;
+        default: // none?
+          break;
+      }
     }
   }
 
@@ -66,8 +89,11 @@ class _MainGamePageState extends State<MainGamePage> {
     });
   }
 
+  // TODO animate next content
   @override
   Widget build(BuildContext context) {
+    localizations ??= AppLocalizations.of(context);
+
     return GestureDetector(
       onTap: _nextQuestion,
       child: DefaultScaffold(
@@ -77,8 +103,27 @@ class _MainGamePageState extends State<MainGamePage> {
         ),
         child: _loading
             ? const Center(child: CircularProgressIndicator())
-            : const Column(
-                children: [],
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      localizations!.gameDefaultRequestPlayerAction,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'alte_haas_grotesk',
+                        color: DataBaseHandler.categoriesDescriptor[
+                            currentQuestion?.categoryId ?? '0']['color'],
+                        fontSize: UIDefaults.gameRequestPlayerActionTextSize,
+                      ),
+                    ),
+                    Text(
+                      currentQuestion?.value ?? 'wenn du ein test bist',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    )
+                  ],
+                ),
               ),
       ),
     );

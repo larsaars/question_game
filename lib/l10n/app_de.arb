@@ -22,5 +22,7 @@
 
   "oldGamesListSelectionPageTitle": "Alte Spiele",
   "oldGamesListSelectionPageMorePlayers": "weitere Spieler*innen",
-  "oldGamesListSelectionPageQuestionsPlayed": "gepielte Fragen"
+  "oldGamesListSelectionPageQuestionsPlayed": "gepielte Fragen",
+
+  "gameDefaultRequestPlayerAction": "HEB DIE HAND"
 }

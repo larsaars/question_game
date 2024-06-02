@@ -9,8 +9,6 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../database/gamestate.dart';
 
-// TODO make list here more like in game freitags!
-// TODO with active categories and players and number of played questions
 class OldGamesListSelectionPage extends StatefulWidget {
   const OldGamesListSelectionPage({super.key});
 
