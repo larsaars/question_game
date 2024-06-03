@@ -4,6 +4,7 @@ import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/ui/widgets/text_switcher.dart';
 
 import '../../../database/gamestate.dart';
 
@@ -18,6 +19,7 @@ class _MainGamePageState extends State<MainGamePage> {
   bool _loading = true;
 
   AppLocalizations? localizations;
+  String titleText = 'whatever';
   Question? currentQuestion;
 
   @override
@@ -51,28 +53,37 @@ class _MainGamePageState extends State<MainGamePage> {
     super.dispose();
   }
 
+  // TODO: explanation texts for the different categories
+  // on second tap show the question
+  // integrate into app_de.arb
+  // add bomb and yes/no pages though
   void _nextQuestion() {
     // get the next question
     currentQuestion = GameStateHandler.currentGameState?.next();
     // if there is no question, the game is over
     if (currentQuestion == null) {
       // pop the page, saving is done on dispose automatically
-      // Navigator.pop(context);
+      Navigator.pop(context);
     } else {
       //  question is available, handle depending on the category id
-      // TODO standard aufforderung is heb die hand statt trink
       switch (currentQuestion!.categoryId) {
         case '1': // default question
+          titleText = localizations!.gameDefaultRequestPlayerAction;
           break;
         case '2': // challenge
+        titleText = 'Challenge!';
           break;
         case '3': // poll
+        titleText = 'Poll!';
           break;
         case '4': // bomb
+        titleText = 'Bomb!';
           break;
         case '5': // yes or no
+        titleText = 'Yes or No!';
           break;
         case '6': // rule
+        titleText = 'Rule!';
           break;
         default: // none?
           break;
@@ -89,13 +100,12 @@ class _MainGamePageState extends State<MainGamePage> {
     });
   }
 
-  // TODO animate next content
   @override
   Widget build(BuildContext context) {
     localizations ??= AppLocalizations.of(context);
 
     return GestureDetector(
-      onTap: _nextQuestion,
+      onTap: () => setState(() => _nextQuestion()), // next question on tap and update view
       child: DefaultScaffold(
         topRightWidget: IconButton(
           icon: const Icon(Icons.edit_note),
@@ -108,8 +118,8 @@ class _MainGamePageState extends State<MainGamePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      localizations!.gameDefaultRequestPlayerAction,
+                    TextSwitcher(
+                      titleText,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontFamily: 'alte_haas_grotesk',
@@ -118,8 +128,8 @@ class _MainGamePageState extends State<MainGamePage> {
                         fontSize: UIDefaults.gameRequestPlayerActionTextSize,
                       ),
                     ),
-                    Text(
-                      currentQuestion?.value ?? 'wenn du ein test bist',
+                    TextSwitcher(
+                      currentQuestion?.value ?? '',
                       style: Theme.of(context).textTheme.headlineMedium,
                     )
                   ],

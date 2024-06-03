@@ -15,7 +15,7 @@ class GameStateHandler {
     List<String> categoriesActive = [];
     for (var categoryKey in DataBaseHandler.categoriesDescriptor.keys) {
       if (BaseUtils.prefs?.getBool('category_$categoryKey') ?? true) {
-        currentGameState?.categoriesActive.add(categoryKey);
+        categoriesActive.add(categoryKey);
       }
     }
 

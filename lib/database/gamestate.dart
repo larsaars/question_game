@@ -70,6 +70,14 @@ class GameState {
     return question;
   }
 
+  int getNumberOfPlayedQuestions() {
+    int count = 0;
+    for (var category in questionsPlayed.keys) {
+      count += questionsPlayed[category]!.length;
+    }
+    return count;
+  }
+
   // init as new game
   GameState(this.categoriesActive) {
     // create a new game with empty player name

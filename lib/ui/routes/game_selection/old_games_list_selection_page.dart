@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:question_game/database/gamestate_handler.dart';
-import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/utils/navigation_utils.dart';
@@ -76,7 +75,7 @@ class _OldGamesListSelectionPageState extends State<OldGamesListSelectionPage>
           '${timeago.format(
             DateTime.fromMillisecondsSinceEpoch(gameState.lastPlayed),
             locale: localizations!.localeName,
-          )}: ${gameState.questions.length} ${localizations!.oldGamesListSelectionPageQuestionsPlayed}',
+          )}: ${gameState.getNumberOfPlayedQuestions()} ${localizations!.oldGamesListSelectionPageQuestionsPlayed}',
         ),
         onTap: () {
           // load the game state

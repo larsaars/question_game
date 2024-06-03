@@ -14,6 +14,9 @@ class CurrentPlayersPage extends StatefulWidget {
   State<CurrentPlayersPage> createState() => _CurrentPlayersPageState();
 }
 
+// TODO (nicht vor projektabgabe): focus does not work properly since new update
+// because the context is somehow not correct
+// must be fixed
 class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     with SingleTickerProviderStateMixin {
   final _listKey = GlobalKey<AnimatedListState>();
@@ -62,6 +65,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
         title: TextField(
           controller: TextEditingController(text: player),
           focusNode: _focusNodes[index],
+          enabled: true,
           decoration: InputDecoration(
             hintText:
                 AppLocalizations.of(context)!.currentPlayersPagePlayerName,
@@ -175,10 +179,10 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
           )
         ],
       ),
-      child: RawKeyboardListener(
+      child: KeyboardListener(
         focusNode: FocusNode(),
-        onKey: (event) {
-          if (event is RawKeyDownEvent) {
+        onKeyEvent: (event) {
+          if (event is KeyDownEvent) {
             int currentIndex = _focusNodes.indexWhere((node) => node.hasFocus);
             if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
               // Shift focus to the previous text field
@@ -210,5 +214,15 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    // dispose focus nodes
+    for (final node in _focusNodes) {
+      node.dispose();
+    }
   }
 }
