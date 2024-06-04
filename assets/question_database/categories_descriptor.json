@@ -33,12 +33,5 @@
     "files": [
       "yesno.txt"
     ]
-  },
-  "5": {
-    "name": "Regeln",
-    "color": "#102027",
-    "files": [
-      "rules.txt"
-    ]
   }
 }

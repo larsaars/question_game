@@ -45,30 +45,32 @@ class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
   Widget build(BuildContext context) {
     return DefaultScaffold(
       title: AppLocalizations.of(context)!.chooseCategoriesPageTitle,
-        child: _loading
-            ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: _items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final item = _items[index];
-                  return CheckboxListTile(
-                      checkColor: item['color'],
-                      activeColor: item['color'],
-                      title: Text(
-                        item['text'],
-                        style: TextStyle(color: item['color']),
-                      ),
-                      value: item['checked'],
-                      onChanged: (bool? value) {
-                        // update in prefs
-                        BaseUtils.prefs?.setBool('category_$index', value!);
-                        // set new state (also in local ram list copy)
-                        setState(() {
-                          item['checked'] = value;
-                        });
-                      });
-                },
-              ));
+      child: _loading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: _items.length,
+              itemBuilder: (BuildContext context, int index) {
+                final item = _items[index];
+                return CheckboxListTile(
+                  checkColor: item['color'],
+                  activeColor: item['color'],
+                  title: Text(
+                    item['text'],
+                    style: TextStyle(color: item['color']),
+                  ),
+                  value: item['checked'],
+                  onChanged: (bool? value) {
+                    // update in prefs
+                    BaseUtils.prefs?.setBool('category_$index', value!);
+                    // set new state (also in local ram list copy)
+                    setState(() {
+                      item['checked'] = value;
+                    });
+                  },
+                );
+              },
+            ),
+    );
   }
 }

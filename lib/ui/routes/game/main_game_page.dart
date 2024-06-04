@@ -16,10 +16,21 @@ class MainGamePage extends StatefulWidget {
 }
 
 class _MainGamePageState extends State<MainGamePage> {
+  // if shows the loading circle (on prepareGameState)
   bool _loading = true;
 
+  // app strings
   AppLocalizations? localizations;
-  String titleText = 'whatever';
+
+  // title and body text of widgets
+  String _titleText = '', _bodyText = '';
+
+  // whether the current question needs a second tap
+  // i.e. challenge category
+  bool _needsSecondTap = false;
+
+  // current question, if is null the page will be cancelled,
+  // so will not be null
   Question? currentQuestion;
 
   @override
@@ -38,7 +49,7 @@ class _MainGamePageState extends State<MainGamePage> {
     DataBaseHandler.prepareGameState().then((_) {
       setState(() {
         // load the first question to show
-        _nextQuestion();
+        setState(() => _nextQuestion());
         // set loading circle to disappear
         _loading = false;
       });
@@ -58,35 +69,65 @@ class _MainGamePageState extends State<MainGamePage> {
   // integrate into app_de.arb
   // add bomb and yes/no pages though
   void _nextQuestion() {
-    // get the next question
-    currentQuestion = GameStateHandler.currentGameState?.next();
-    // if there is no question, the game is over
-    if (currentQuestion == null) {
-      // pop the page, saving is done on dispose automatically
-      Navigator.pop(context);
-    } else {
-      //  question is available, handle depending on the category id
+    // if the current question still  needs a second tap,
+    // don't directly load
+    // next question method but handle the second tap
+    // TODO this needs second tap part is done
+    if (_needsSecondTap) {
       switch (currentQuestion!.categoryId) {
-        case '1': // default question
-          titleText = localizations!.gameDefaultRequestPlayerAction;
+        case '1': // challenge
+        case '2': // poll
+          // for these categories, show the question on second tap
+          _bodyText = currentQuestion!.value;
           break;
-        case '2': // challenge
-        titleText = 'Challenge!';
+        case '3': // bomb
+          // for bomb, show the bomb start button
+          _bodyText = '';
+          _showBombStartButton = true; // TODO show bomb button instead of body text
           break;
-        case '3': // poll
-        titleText = 'Poll!';
+        case '0': // default question
+        case '4': // yes or no
+        default:
+          // do nothing
           break;
-        case '4': // bomb
-        titleText = 'Bomb!';
-          break;
-        case '5': // yes or no
-        titleText = 'Yes or No!';
-          break;
-        case '6': // rule
-        titleText = 'Rule!';
-          break;
-        default: // none?
-          break;
+      }
+    } else {
+      // get the next question
+      currentQuestion = GameStateHandler.currentGameState!.next();
+      // if there is no question, the game is over
+      if (currentQuestion == null) {
+        // pop the page, saving is done on dispose automatically
+        Navigator.pop(context);
+      } else {
+        //  question is available, handle depending on the category id
+        switch (currentQuestion!.categoryId) {
+          case '0': // default question
+            _needsSecondTap = false;
+            _titleText = localizations!.gameDefaultRequestPlayerAction;
+            _bodyText = currentQuestion!.value;
+            break;
+          case '1': // challenge
+            _needsSecondTap = true;
+            _titleText = ...
+            _bodyText = ...
+            break;
+          case '2': // poll
+            _needsSecondTap = true;
+            _titleText = ...
+            _bodyText = ...
+            break;
+          case '3': // bomb
+            _needsSecondTap = true;
+          _titleText = ...
+          _bodyText = ...
+            break;
+          case '4': // yes or no
+            _needsSecondTap = false;
+            // TODO start yesno page
+            break;
+          default: // none?
+            break;
+        }
       }
     }
   }
@@ -105,7 +146,8 @@ class _MainGamePageState extends State<MainGamePage> {
     localizations ??= AppLocalizations.of(context);
 
     return GestureDetector(
-      onTap: () => setState(() => _nextQuestion()), // next question on tap and update view
+      onTap: () => setState(() => _nextQuestion()),
+      // call tap screen and update the widget tree
       child: DefaultScaffold(
         topRightWidget: IconButton(
           icon: const Icon(Icons.edit_note),
@@ -119,7 +161,7 @@ class _MainGamePageState extends State<MainGamePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextSwitcher(
-                      titleText,
+                      _titleText,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontFamily: 'alte_haas_grotesk',
@@ -129,7 +171,7 @@ class _MainGamePageState extends State<MainGamePage> {
                       ),
                     ),
                     TextSwitcher(
-                      currentQuestion?.value ?? '',
+                      _bodyText,
                       style: Theme.of(context).textTheme.headlineMedium,
                     )
                   ],
