@@ -14,7 +14,6 @@ class CurrentPlayersPage extends StatefulWidget {
   State<CurrentPlayersPage> createState() => _CurrentPlayersPageState();
 }
 
-// TODO (nicht vor projektabgabe): focus does not work properly since new update
 // because the context is somehow not correct
 // must be fixed
 class _CurrentPlayersPageState extends State<CurrentPlayersPage>
@@ -32,9 +31,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
 
     // if the current game state is null, pop the page
     if (GameStateHandler.currentGameState == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pop(context);
-      });
+      NavigationUtils.popWhenPossible(context);
     }
 
     // pass the reference of the list to the state
@@ -147,7 +144,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
       // coming here from the main game to edit players list
       // so only pop page to get back
     } else if (_comingFromRoute == 'main-game') {
-      Navigator.pop(context);
+      NavigationUtils.popWhenPossible(context);
     }
   }
 

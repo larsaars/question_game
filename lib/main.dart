@@ -5,7 +5,7 @@ import 'package:question_game/ui/routes/about.dart';
 import 'package:question_game/ui/routes/choose_categories_page.dart';
 import 'package:question_game/ui/routes/current_players_page.dart';
 import 'package:question_game/ui/routes/game/game_bomb_page.dart';
-import 'package:question_game/ui/routes/game/game_yes_no_page.dart';
+import 'package:question_game/ui/routes/game/yesno/game_yes_no_page.dart';
 import 'package:question_game/ui/routes/game/main_game_page.dart';
 import 'package:question_game/ui/routes/game_selection/game_selection_page.dart';
 import 'package:question_game/ui/routes/home_page.dart';

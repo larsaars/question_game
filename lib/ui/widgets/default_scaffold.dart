@@ -5,6 +5,7 @@ import 'package:pwa_install/pwa_install.dart';
 import 'package:question_game/ui/routes/about.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/ui_defaults.dart';
+import 'package:question_game/utils/base_utils.dart';
 
 // default scaffold as outermost widget to embed other widgets
 // contains a back button and a child widget

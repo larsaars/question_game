@@ -5,13 +5,14 @@ import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/utils/base_utils.dart';
 
+import '../../../utils/navigation_utils.dart';
 import '../../widgets/default_scaffold.dart';
 
 class GameBombPage extends StatefulWidget {
-  const GameBombPage({Key? key}) : super(key: key);
+  const GameBombPage({super.key});
 
   @override
-  _GameBombPageState createState() => _GameBombPageState();
+  State<GameBombPage> createState() => _GameBombPageState();
 }
 
 class _GameBombPageState extends State<GameBombPage> {
@@ -28,9 +29,7 @@ class _GameBombPageState extends State<GameBombPage> {
 
     // pop to last route if there is no game state
     if (GameStateHandler.currentGameState == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pop(context);
-      });
+      NavigationUtils.popWhenPossible(context);
     }
 
     // set explosion audio source, after loading, start the countdown timer (30-60 seconds)
@@ -40,7 +39,7 @@ class _GameBombPageState extends State<GameBombPage> {
         // stop the ticking sound
         _tickingAudioPlayer.stop();
         // when the timer is done, play the explosion sound and pop the page
-        _explosionAudioPlayer.play().then((_) => Navigator.pop(context));
+        _explosionAudioPlayer.play().then((_) => NavigationUtils.popWhenPossible(context));
       });
     });
 
@@ -70,6 +69,10 @@ class _GameBombPageState extends State<GameBombPage> {
       onPopInvoked: (_) => false, // ignore back button
       child: DefaultScaffold(
         backButtonIcon: Icons.keyboard_double_arrow_right,
+        topRightWidget: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => NavigationUtils.popTillMain(context),
+        ),
         child: Center(
           child: Text(
             GameStateHandler.currentGameState?.currentQuestion?.value ?? '',

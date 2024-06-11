@@ -43,9 +43,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
 
     // pop to last route if there is no game state
     if (GameStateHandler.currentGameState == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pop(context);
-      });
+      NavigationUtils.popWhenPossible(context);
     }
 
     // prepare the game state (load the questions from database)
@@ -122,7 +120,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
       // if there is no question, the game is over
       if (currentQuestion == null) {
         // pop the page, saving is done on dispose automatically
-        Navigator.pop(context);
+        NavigationUtils.popWhenPossible(context);
       } else {
         //  question is available, handle depending on the category id
         switch (currentQuestion!.categoryId) {
@@ -148,7 +146,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
             break;
           case '4': // yes or no
             _needsSecondTap = false;
-            Navigator.pushNamed(context, '/game-yesno');
+            NavigationUtils.pushNamedWhenPossible(context, '/game-yesno');
             break;
           default: // none?
             break;
@@ -202,7 +200,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
                       child: _showStartBombButton
                           ? ElevatedButton(
                               onPressed: () =>
-                                  Navigator.pushNamed(context, '/game-bomb'),
+                                  NavigationUtils.pushNamedWhenPossible(context, '/game-bomb'),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

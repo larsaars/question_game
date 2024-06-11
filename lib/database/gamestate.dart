@@ -50,6 +50,13 @@ class GameState {
     // add the question id to the list of questions played
     questionsPlayed[currentQuestion!.categoryId]?.add(currentQuestion!.questionId);
 
+    // if the question is of category 4 (yes/no)
+    // and there are not at least 2 players,
+    // skip the question
+    if (currentQuestion!.categoryId == '4' && players.length < 2) {
+      return next();
+    }
+
     // xy replacement
     // xy is a placeholder for a player name
     // if there are more xy in the text than players,

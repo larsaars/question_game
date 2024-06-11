@@ -31,5 +31,9 @@
   "gameBodyTextPoll": "Es folgt eine Frage. Lest diese laut vor und stimmt dann auf drei für eine Person, auf welche die Beschreibung eurer Meinung nach am ehesten zutrifft.",
   "gameTitleTextBomb": "BOMBE",
   "gameBodyTextBomb": "Sobald ihr auf \"Bombe starten\" drückt erscheint eine Kategorie/Frage. Findet nun reihum passende Antwortmöglichkeiten. Diese dürfen sich nicht wiederholen. Die Person bei der die Bombe explodiert, hat verloren.",
-  "gameStartBombButton": "Bombe starten"
+  "gameStartBombButton": "Bombe starten",
+  "gameTitleTextYesNo": "JA oder NEIN",
+  "gameYesNoExplanation1": "Es folgt eine Aussage, die sich entweder mit \"Ja\" oder mit \"Nein\" beantworten lässt. Lest diese laut vor und macht euch kurz darüber Gedanken, wie ihr persönlich dazu steht - allerdings ohne euch auszutauschen! Folgt danach den Anweisungen auf dem Display.",
+  "gameYesNoExplanation2": "Reicht nun das Handy herum und gebt an, wie ihr zu der Aussage steht und von wie vielen eurer Mitspieler ihr denkt, dass sie die Frage mit \"Ja\" beantworten. Andere Mitspieler können eure Antwort nicht sehen! Wer richtig liegt bekommt Punkte!",
+  "gameYesNoAnswersReady": "Alle Spieler haben geantwortet. Seid ihr bereit für die Antwort?"
 }
