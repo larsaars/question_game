@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TextSwitcher extends StatelessWidget {
-  final String data;
-  final TextStyle? style;
+class MyAnimatedSwitcher extends StatelessWidget {
+  final Widget child;
 
-  const TextSwitcher(
-    this.data, {
+  const MyAnimatedSwitcher({
     super.key,
-    this.style = const TextStyle(),
+    required this.child,
   });
 
   @override
@@ -20,11 +18,7 @@ class TextSwitcher extends StatelessWidget {
           child: child,
         );
       },
-      child: Text(
-        data,
-        style: style,
-        key: ValueKey<String>(data),
-      ),
+      child: child,
     );
   }
 }

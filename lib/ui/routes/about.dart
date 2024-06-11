@@ -8,6 +8,7 @@ void showMyAboutDialog(BuildContext context) async {
   final loc = AppLocalizations.of(context); // strings
 
   showAboutDialog(
+    // ignore: use_build_context_synchronously
     context: context,
     applicationIcon: Image.asset(
       'imgs/app_icon.png',

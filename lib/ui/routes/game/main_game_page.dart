@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:question_game/database/database_handler.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
+import 'package:question_game/ui/widgets/centered_text_icon_button.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/widgets/text_switcher.dart';
 
 import '../../../database/gamestate.dart';
+import '../../widgets/my_animated_switcher.dart';
 
 class MainGamePage extends StatefulWidget {
   const MainGamePage({super.key});
@@ -32,6 +35,9 @@ class _MainGamePageState extends State<MainGamePage> {
   // current question, if is null the page will be cancelled,
   // so will not be null
   Question? currentQuestion;
+
+  // whether to show the bomb start button
+  bool _showStartBombButton = false;
 
   @override
   void initState() {
@@ -74,6 +80,9 @@ class _MainGamePageState extends State<MainGamePage> {
     // next question method but handle the second tap
     // TODO this needs second tap part is done
     if (_needsSecondTap) {
+      // reset bool
+      _needsSecondTap = false;
+
       switch (currentQuestion!.categoryId) {
         case '1': // challenge
         case '2': // poll
@@ -83,7 +92,7 @@ class _MainGamePageState extends State<MainGamePage> {
         case '3': // bomb
           // for bomb, show the bomb start button
           _bodyText = '';
-          _showBombStartButton = true; // TODO show bomb button instead of body text
+          _showStartBombButton = true;
           break;
         case '0': // default question
         case '4': // yes or no
@@ -92,6 +101,8 @@ class _MainGamePageState extends State<MainGamePage> {
           break;
       }
     } else {
+      // the show bomb button will be hidden in any case
+      _showStartBombButton = false;
       // get the next question
       currentQuestion = GameStateHandler.currentGameState!.next();
       // if there is no question, the game is over
@@ -108,22 +119,22 @@ class _MainGamePageState extends State<MainGamePage> {
             break;
           case '1': // challenge
             _needsSecondTap = true;
-            _titleText = ...
-            _bodyText = ...
+            _titleText = localizations!.gameTitleTextChallenge;
+            _bodyText = localizations!.gameBodyTextChallenge;
             break;
           case '2': // poll
             _needsSecondTap = true;
-            _titleText = ...
-            _bodyText = ...
+            _titleText = localizations!.gameTitleTextPoll;
+            _bodyText = localizations!.gameBodyTextPoll;
             break;
           case '3': // bomb
             _needsSecondTap = true;
-          _titleText = ...
-          _bodyText = ...
+            _titleText = localizations!.gameTitleTextBomb;
+            _bodyText = localizations!.gameBodyTextBomb;
             break;
           case '4': // yes or no
             _needsSecondTap = false;
-            // TODO start yesno page
+            Navigator.pushNamed(context, '/game-yesno');
             break;
           default: // none?
             break;
@@ -145,6 +156,11 @@ class _MainGamePageState extends State<MainGamePage> {
   Widget build(BuildContext context) {
     localizations ??= AppLocalizations.of(context);
 
+    const bodyTextStyle = TextStyle(
+      color: UIDefaults.colorGameBodyText,
+      fontSize: UIDefaults.gameBodyTextSize,
+    );
+
     return GestureDetector(
       onTap: () => setState(() => _nextQuestion()),
       // call tap screen and update the widget tree
@@ -160,20 +176,43 @@ class _MainGamePageState extends State<MainGamePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TextSwitcher(
-                      _titleText,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'alte_haas_grotesk',
-                        color: DataBaseHandler.categoriesDescriptor[
-                            currentQuestion?.categoryId ?? '0']['color'],
-                        fontSize: UIDefaults.gameRequestPlayerActionTextSize,
+                    MyAnimatedSwitcher(
+                      child: Text(
+                        _titleText,
+                        key: ValueKey<String>(_titleText),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'alte_haas_grotesk',
+                          color: DataBaseHandler.categoriesDescriptor[
+                              currentQuestion?.categoryId ?? '0']['color'],
+                          fontSize: UIDefaults.gameTitleTextSize,
+                        ),
                       ),
                     ),
-                    TextSwitcher(
-                      _bodyText,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    )
+                    MyAnimatedSwitcher(
+                      child: _showStartBombButton
+                          ? ElevatedButton(
+                            onPressed: () => Navigator.pushNamed(
+                                context, '/game-bomb'),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(Icons.warning),
+                                const SizedBox(width: 8.0),
+                                Text(
+                                  localizations!.gameStartBombButton,
+                                  style: bodyTextStyle,
+                                ),
+                              ],
+                            ),
+                          )
+                          : Text(
+                              _bodyText,
+                              key: ValueKey<String>(_bodyText),
+                              textAlign: TextAlign.center,
+                              style: bodyTextStyle,
+                            ),
+                    ),
                   ],
                 ),
               ),

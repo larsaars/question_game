@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:question_game/utils/ui_utils.dart';
 
-
 class UIDefaults {
   static final backgroundColor = UIUtils.createRandomPastelBackgroundColor();
 
@@ -10,10 +9,9 @@ class UIDefaults {
       colorDefaultIcon = Colors.black,
       colorYes = Color(0xf003d33f),
       colorNo = Color(0xf7f0000f),
-      colorSubQuestionText = Color(0xff455a64);
+      colorGameBodyText = Color(0xff455a64);
 
-  static const defaultIconSize = 36.0,
-      defaultButtonHeight = 48.0;
+  static const defaultIconSize = 36.0, defaultButtonHeight = 48.0;
 
-  static const gameRequestPlayerActionTextSize = 60.0;
+  static const gameTitleTextSize = 60.0, gameBodyTextSize = 30.0;
 }

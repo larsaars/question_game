@@ -24,5 +24,12 @@
   "oldGamesListSelectionPageMorePlayers": "weitere Spieler*innen",
   "oldGamesListSelectionPageQuestionsPlayed": "gepielte Fragen",
 
-  "gameDefaultRequestPlayerAction": "HEB DIE HAND"
+  "gameDefaultRequestPlayerAction": "HEB DIE HAND",
+  "gameTitleTextChallenge": "CHALLENGE!",
+  "gameBodyTextChallenge": "Bei der folgenden Challenge geht es um Schnelligkeit. Wer es schafft, die Challenge als erstes zu bestreiten, hat gewonnen.",
+  "gameTitleTextPoll": "ABSTIMMUNG!",
+  "gameBodyTextPoll": "Es folgt eine Frage. Lest diese laut vor und stimmt dann auf drei für eine Person, auf welche die Beschreibung eurer Meinung nach am ehesten zutrifft.",
+  "gameTitleTextBomb": "BOMBE",
+  "gameBodyTextBomb": "Sobald ihr auf \"Bombe starten\" drückt erscheint eine Kategorie/Frage. Findet nun reihum passende Antwortmöglichkeiten. Diese dürfen sich nicht wiederholen. Die Person bei der die Bombe explodiert, hat verloren.",
+  "gameStartBombButton": "Bombe starten"
 }
