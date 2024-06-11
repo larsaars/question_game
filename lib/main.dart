@@ -11,6 +11,7 @@ import 'package:question_game/ui/routes/game_selection/game_selection_page.dart'
 import 'package:question_game/ui/routes/home_page.dart';
 import 'package:question_game/ui/routes/game_selection/old_games_list_selection_page.dart';
 import 'package:question_game/ui/ui_defaults.dart';
+import 'package:question_game/utils/navigation_utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 Future<void> main() async {
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      navigatorObservers: [NavigationUtils.routeObserver],
       routes: {
         '/': (context) => const MyHomePage(),
         '/categories': (context) => const ChooseCategoriesPage(),

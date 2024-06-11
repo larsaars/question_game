@@ -20,8 +20,9 @@ dependencies:
   flutter_launcher_icons: any
   shared_preferences: any
   pwa_install: any
-  uuid: ^4.2.2
-  timeago: ^3.6.1
+  uuid: any
+  timeago: any
+  just_audio: any
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:question_game/database/database_handler.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
-import 'package:question_game/ui/widgets/centered_text_icon_button.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:question_game/ui/widgets/text_switcher.dart';
+import 'package:question_game/utils/navigation_utils.dart';
 
 import '../../../database/gamestate.dart';
 import '../../widgets/my_animated_switcher.dart';
@@ -18,7 +16,7 @@ class MainGamePage extends StatefulWidget {
   State<MainGamePage> createState() => _MainGamePageState();
 }
 
-class _MainGamePageState extends State<MainGamePage> {
+class _MainGamePageState extends State<MainGamePage> with RouteAware {
   // if shows the loading circle (on prepareGameState)
   bool _loading = true;
 
@@ -60,6 +58,14 @@ class _MainGamePageState extends State<MainGamePage> {
         _loading = false;
       });
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // subscribe to the route observer (for didPopNext)
+      final route = ModalRoute.of(context);
+      if (route is PageRoute) {
+        NavigationUtils.routeObserver.subscribe(this, route);
+      }
+    });
   }
 
   @override
@@ -67,10 +73,19 @@ class _MainGamePageState extends State<MainGamePage> {
     // save here the current game state
     GameStateHandler.save();
 
+    // unsubscribe from the route observer
+    NavigationUtils.routeObserver.unsubscribe(this);
+
     super.dispose();
   }
 
-  // TODO: explanation texts for the different categories
+  @override
+  void didPopNext() {
+    // load next question when the page is shown again
+    // (popped/returning from bomb or yesno pages)
+    setState(() => _nextQuestion());
+  }
+
   // on second tap show the question
   // integrate into app_de.arb
   // add bomb and yes/no pages though
@@ -78,7 +93,6 @@ class _MainGamePageState extends State<MainGamePage> {
     // if the current question still  needs a second tap,
     // don't directly load
     // next question method but handle the second tap
-    // TODO this needs second tap part is done
     if (_needsSecondTap) {
       // reset bool
       _needsSecondTap = false;
@@ -156,11 +170,6 @@ class _MainGamePageState extends State<MainGamePage> {
   Widget build(BuildContext context) {
     localizations ??= AppLocalizations.of(context);
 
-    const bodyTextStyle = TextStyle(
-      color: UIDefaults.colorGameBodyText,
-      fontSize: UIDefaults.gameBodyTextSize,
-    );
-
     return GestureDetector(
       onTap: () => setState(() => _nextQuestion()),
       // call tap screen and update the widget tree
@@ -192,25 +201,25 @@ class _MainGamePageState extends State<MainGamePage> {
                     MyAnimatedSwitcher(
                       child: _showStartBombButton
                           ? ElevatedButton(
-                            onPressed: () => Navigator.pushNamed(
-                                context, '/game-bomb'),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(Icons.warning),
-                                const SizedBox(width: 8.0),
-                                Text(
-                                  localizations!.gameStartBombButton,
-                                  style: bodyTextStyle,
-                                ),
-                              ],
-                            ),
-                          )
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, '/game-bomb'),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.warning),
+                                  const SizedBox(width: 8.0),
+                                  Text(
+                                    localizations!.gameStartBombButton,
+                                    style: UIDefaults.gameBodyTextStyle,
+                                  ),
+                                ],
+                              ),
+                            )
                           : Text(
                               _bodyText,
                               key: ValueKey<String>(_bodyText),
                               textAlign: TextAlign.center,
-                              style: bodyTextStyle,
+                              style: UIDefaults.gameBodyTextStyle,
                             ),
                     ),
                   ],

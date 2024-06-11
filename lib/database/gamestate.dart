@@ -33,6 +33,10 @@ class GameState {
   // they will not be stored in the database (when toJson is being called)
   final questions = <Question>[];
 
+  // store current question as a variable so that it can be accessed from static currentGameState
+  // will be set in next()
+  Question? currentQuestion;
+
   /// returns the next question to be played
   /// and handles the xy replacement
   Question? next() {
@@ -41,16 +45,16 @@ class GameState {
     }
 
     // pop the first question from the list
-    final question = questions.removeAt(0);
+    currentQuestion = questions.removeAt(0);
 
     // add the question id to the list of questions played
-    questionsPlayed[question.categoryId]?.add(question.questionId);
+    questionsPlayed[currentQuestion!.categoryId]?.add(currentQuestion!.questionId);
 
     // xy replacement
     // xy is a placeholder for a player name
     // if there are more xy in the text than players,
     // skip the question
-    if (question.value.split('xy').length - 1 > players.length) {
+    if (currentQuestion!.value.split('xy').length - 1 > players.length) {
       return next();
     }
 
@@ -63,11 +67,11 @@ class GameState {
 
     int counter = 0;
 
-    question.value = question.value.replaceAllMapped('xy', (match) {
+    currentQuestion!.value = currentQuestion!.value.replaceAllMapped('xy', (match) {
       return players[counter++];
     });
 
-    return question;
+    return currentQuestion;
   }
 
   int getNumberOfPlayedQuestions() {

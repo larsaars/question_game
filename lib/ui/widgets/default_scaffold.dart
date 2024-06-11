@@ -22,6 +22,8 @@ class DefaultScaffold extends StatelessWidget {
   final String? title;
   // if is back button or app icon with dropdown menu
   final bool backButton;
+  // the back button icon
+  final IconData backButtonIcon;
   // if view should be cut off at the action button
   // or if the action buttons float over the view
   final bool cutOffAtActionButton;
@@ -31,6 +33,7 @@ class DefaultScaffold extends StatelessWidget {
     required this.child,
     this.title,
     this.backButton = true,
+    this.backButtonIcon = Icons.arrow_back_ios_new,
     this.cutOffAtActionButton = false,
     this.actionButton,
     this.topRightWidget,
@@ -125,7 +128,7 @@ class DefaultScaffold extends StatelessWidget {
                   // if is back button, show back button
                   ? IconButton(
                       tooltip: loc!.defaultScaffoldBack,
-                      icon: const Icon(Icons.arrow_back_ios_new),
+                      icon: Icon(backButtonIcon),
                       onPressed: Navigator.of(context).pop,
                     )
                   // if is not back button, show app icon with dropdown menu
