@@ -235,7 +235,7 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
                     _bodyText,
                     key: ValueKey<String>(_bodyText),
                     textAlign: TextAlign.center,
-                    defaultStyle: UIDefaults.gameBodyTextStyle,
+                    style: UIDefaults.gameBodyTextStyle,
                   ),
                 ),
             ],

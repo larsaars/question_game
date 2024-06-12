@@ -184,6 +184,8 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
       onTap: () => setState(_nextQuestion),
       // call tap screen and update the widget tree
       child: DefaultScaffold(
+        backButtonIcon: Icons.close,
+        backButtonTooltip: localizations!.gameExit,
         topRightWidget: IconButton(
           icon: const Icon(Icons.edit_note),
           onPressed: _editPlayerList,

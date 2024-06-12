@@ -23,8 +23,8 @@ dependencies:
   uuid: any
   timeago: any
   just_audio: any
-  fluttertoast: ^8.2.6
-  html: ^0.15.4
+  fluttertoast: any
+  html: any
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +38,11 @@ flutter:
 
   assets:
     - assets/
+    - assets/imgs/
+    - assets/fonts/
+    - assets/sounds/
+    - assets/question_database/
+    - assets/licenses/
 
   fonts:
     - family: louis_george_cafe
@@ -70,25 +75,3 @@ flutter_launcher_icons:
     image_path: "assets/imgs/app_icon.png"
     background_color: "#ffffff"
     theme_color: "#ffffff"
-
-
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the fonts family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the fonts. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
