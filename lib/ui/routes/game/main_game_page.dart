@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:question_game/database/database_handler.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/utils/navigation_utils.dart';
+import 'package:question_game/utils/ui_utils.dart';
 
 import '../../../database/gamestate.dart';
 import '../../widgets/my_animated_switcher.dart';
@@ -51,7 +53,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
     DataBaseHandler.prepareGameState().then((_) {
       setState(() {
         // load the first question to show
-        setState(() => _nextQuestion());
+        _nextQuestion();
         // set loading circle to disappear
         _loading = false;
       });
@@ -81,7 +83,15 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
   void didPopNext() {
     // load next question when the page is shown again
     // (popped/returning from bomb or yesno pages)
-    setState(() => _nextQuestion());
+
+    // if the user wants to pop till main, do not load the next question
+    // (which could lead to unexpected behaviour such as routing to the next yesno page)
+    if (NavigationUtils.wantsToPopTillMain) {
+      // reset flag
+      NavigationUtils.wantsToPopTillMain = false;
+    } else {
+      setState(_nextQuestion);
+    }
   }
 
   // on second tap show the question
@@ -119,6 +129,8 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
       currentQuestion = GameStateHandler.currentGameState!.next();
       // if there is no question, the game is over
       if (currentQuestion == null) {
+        // show a message why popping
+        UIUtils.showToast(localizations!.gameNoQuestionsLeft);
         // pop the page, saving is done on dispose automatically
         NavigationUtils.popWhenPossible(context);
       } else {
@@ -169,7 +181,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
     localizations ??= AppLocalizations.of(context);
 
     return GestureDetector(
-      onTap: () => setState(() => _nextQuestion()),
+      onTap: () => setState(_nextQuestion),
       // call tap screen and update the widget tree
       child: DefaultScaffold(
         topRightWidget: IconButton(
@@ -200,7 +212,8 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
                       child: _showStartBombButton
                           ? ElevatedButton(
                               onPressed: () =>
-                                  NavigationUtils.pushNamedWhenPossible(context, '/game-bomb'),
+                                  NavigationUtils.pushNamedWhenPossible(
+                                      context, '/game-bomb'),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

@@ -25,7 +25,12 @@ class NavigationUtils {
     });
   }
 
-  static void popTillMain(BuildContext context) {
+  // flag used in main game screen since didPopNext is called
+  static bool wantsToPopTillMain = false;
+  static void fromGamePopTillMain(BuildContext context) {
+    // set the flag to true
+    wantsToPopTillMain = true;
+    // pop the current route until the main route
     Navigator.popUntil(context, (route) => route.isFirst);
   }
 }

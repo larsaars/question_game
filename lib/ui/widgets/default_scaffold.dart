@@ -6,25 +6,39 @@ import 'package:question_game/ui/routes/about.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/utils/base_utils.dart';
+import 'package:question_game/utils/ui_utils.dart';
 
 // default scaffold as outermost widget to embed other widgets
 // contains a back button and a child widget
 class DefaultScaffold extends StatelessWidget {
   // child widget to be displayed in the scaffold
   final Widget child;
+
   // action button to be displayed in the bottom right corner (null if none)
   final Widget? actionButton;
+
   // widget that can be displayed on the top right corner
   // on the same height as the back button
   final Widget? topRightWidget;
+
   // (gets padding of one default icon size per default)
   final double topRightWidgetWidth;
+
   // title of the scaffold
   final String? title;
+
   // if is back button or app icon with dropdown menu
   final bool backButton;
+
   // the back button icon
   final IconData backButtonIcon;
+
+  // back button functionality
+  final Function()? backButtonFunction;
+
+  // back button tooltip
+  final String? backButtonTooltip;
+
   // if view should be cut off at the action button
   // or if the action buttons float over the view
   final bool cutOffAtActionButton;
@@ -35,6 +49,8 @@ class DefaultScaffold extends StatelessWidget {
     this.title,
     this.backButton = true,
     this.backButtonIcon = Icons.arrow_back_ios_new,
+    this.backButtonFunction,
+    this.backButtonTooltip,
     this.cutOffAtActionButton = false,
     this.actionButton,
     this.topRightWidget,
@@ -49,42 +65,23 @@ class DefaultScaffold extends StatelessWidget {
     }
   }
 
-  List<double> _determinePadding(BuildContext context) {
-    // return horizontal and vertical padding
-    // check if is on a small screen (width)
-    // if so, limit content size
-    final mediaQuery = MediaQuery.of(context);
-    final screenWidth = mediaQuery.size.width;
-    final screenHeight = mediaQuery.size.height;
-
-    // if is a small screen, set no padding
-    if (screenWidth < 820) {
-      return [0.0, 0.0];
-    } else {
-      // if is a large screen, set padding
-      // relative to size of screen
-      return [
-        screenWidth * 0.24,
-        max(screenHeight * 0.04, UIDefaults.defaultIconSize),
-        // ensure padding is at least as high as back button
-      ];
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
-    final [horizontalPadding, verticalPadding] = _determinePadding(context);
+    final [horizontalPadding, verticalPadding] =
+        UIUtils.determinePadding(context, forDefaultScaffold: true);
 
     return Scaffold(
       backgroundColor: UIDefaults.backgroundColor,
       body: Stack(
         children: <Widget>[
-          Padding( // content in padding with fab
+          Padding(
+            // content in padding with fab
             padding: EdgeInsets.only(
               // ensure padding is at least as wide as the icon on the left
               left: max(UIDefaults.defaultIconSize, horizontalPadding),
-              right: max(topRightWidget == null ? 0 : topRightWidgetWidth, horizontalPadding),
+              right: max(topRightWidget == null ? 0 : topRightWidgetWidth,
+                  horizontalPadding),
               top: verticalPadding,
               bottom: verticalPadding,
             ),
@@ -121,16 +118,18 @@ class DefaultScaffold extends StatelessWidget {
                 ),
             ]),
           ),
-          Align( // align with back button top left
+          Align(
+            // align with back button top left
             alignment: Alignment.topLeft,
             child: Hero(
               tag: 'default-scaffold-button',
               child: backButton
                   // if is back button, show back button
                   ? IconButton(
-                      tooltip: loc!.defaultScaffoldBack,
+                      tooltip: backButtonTooltip ?? loc!.defaultScaffoldBack,
                       icon: Icon(backButtonIcon),
-                      onPressed: Navigator.of(context).pop,
+                      onPressed:
+                          backButtonFunction ?? Navigator.of(context).pop,
                     )
                   // if is not back button, show app icon with dropdown menu
                   // showing about and install PWA (if available)
@@ -172,7 +171,8 @@ class DefaultScaffold extends StatelessWidget {
             ),
           ),
           if (topRightWidget != null)
-            Align( // align with top right widget
+            Align(
+              // align with top right widget
               alignment: Alignment.topRight,
               child: topRightWidget!,
             ),

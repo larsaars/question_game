@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/utils/base_utils.dart';
+import 'package:question_game/utils/ui_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../database/database_handler.dart';
@@ -72,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // default title text can only be here set (not in initState)
     // since it requires the context which is not available before
     _defaultTitleText ??= _titleText = AppLocalizations.of(context)!.appTitle;
+
     return DefaultScaffold(
       backButton: false,
       child: _loading

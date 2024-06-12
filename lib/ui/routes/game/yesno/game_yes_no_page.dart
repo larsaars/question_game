@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:question_game/ui/routes/game/yesno/yes_no_submit_answer_dialog_widget.dart';
 import 'package:question_game/ui/routes/game/yesno/yesno_answer.dart';
-import 'package:question_game/ui/widgets/centered_text_icon_button.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:question_game/ui/widgets/my_animated_switcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../database/database_handler.dart';
 import '../../../../database/gamestate_handler.dart';
 import '../../../../utils/navigation_utils.dart';
+import '../../../../utils/ui_utils.dart';
 import '../../../ui_defaults.dart';
 
 class GameYesNoPage extends StatefulWidget {
@@ -49,13 +49,15 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
     });
   }
 
-  void _onTap() {
+  void _onTap({updateCounter = true}) {
     // if is on screen 3, do nothing on tap
     // (screen 3 will be handled by list of players and their answers and guesses)
     if (_currentScreen == 3) return;
 
     // update screen counter
-    _currentScreen++;
+    if (updateCounter) {
+      _currentScreen++;
+    }
 
     // update body text depending on screen
     switch (_currentScreen) {
@@ -73,7 +75,48 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
         _bodyText = localizations!.gameYesNoAnswersReady;
         break;
       case 5: // screen 5: show results (how many yes and who gets how many points)
-        // TODO compute and show text
+        // get number of yes answers
+        final yesAnswers =
+            _answers.values.where((element) => element.answer).length;
+        // set title text to number of yes answers
+        _titleText = yesAnswers.toString();
+        // set body text how many points each player gets
+        // you get:
+        // - 3 points for a correct guess
+        // - 1 point for a guess that's +1 or -1 off the correct answer
+        // - else nothing
+        // lists for players with correct guess, guess +1 or -1 off
+        List<String> correctGuesses = [], guessOneOff = [];
+        for (final player in _answers.keys) {
+          final answer = _answers[player]!;
+          if (yesAnswers == answer.guess) {
+            correctGuesses.add(player);
+          } else if (yesAnswers - 1 == answer.guess ||
+              yesAnswers + 1 == answer.guess) {
+            guessOneOff.add(player);
+          }
+        }
+
+        // show beautified list of players with correct guess and guess +1 or -1 off
+        _bodyText = '${localizations!.gameYesNoPlayerAnsweredYes(yesAnswers)}\n';
+        if (correctGuesses.isNotEmpty) {
+          _bodyText += '\n';
+          _bodyText += localizations!.gameYesNoPlayerGuessedCorrectly(
+            correctGuesses.length,
+            UIUtils.beautifyStringListForDisplaying(correctGuesses, limitOfShownStrings: 6),
+          );
+        }
+
+        if (guessOneOff.isNotEmpty) {
+          _bodyText += '\n';
+          _bodyText += localizations!.gameYesNoPlayerGuessedOneOff(
+            guessOneOff.length,
+            UIUtils.beautifyStringListForDisplaying(guessOneOff, limitOfShownStrings: 6),
+          );
+        }
+        break;
+      case 6: // screen 6: exit
+        Navigator.pop(context);
         break;
     }
   }
@@ -88,6 +131,7 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
             return YesNoSubmitAnswerDialogWidget(
               setState: setState,
               answer: _answers[player]!,
+              yesNoColor: _yesnoColor,
             );
           },
         );
@@ -98,7 +142,10 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
         // if all players have answered, show the results
         // update screen number here
         _currentScreen = 4;
-        _onTap();
+        setState(() => _onTap(updateCounter: false));
+      } else {
+        // set state either way since the icon has to be updated
+        setState(() {});
       }
     });
   }
@@ -114,12 +161,15 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
     }
 
     return GestureDetector(
-      onTap: () => setState(() => _onTap()),
+      onTap: () => setState(_onTap),
       child: DefaultScaffold(
-        backButtonIcon: Icons.keyboard_double_arrow_right,
+        backButtonIcon: Icons.close,
+        backButtonFunction: () => NavigationUtils.fromGamePopTillMain(context),
+        backButtonTooltip: localizations!.gameExit,
         topRightWidget: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => NavigationUtils.popTillMain(context),
+          icon: const Icon(Icons.keyboard_double_arrow_right),
+          tooltip: localizations!.gameSkip,
+          onPressed: () => Navigator.pop(context),
         ),
         child: Center(
           child: Column(
@@ -139,9 +189,9 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
                 ),
               if (_currentScreen == 3)
                 Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
+                  child: Center(
                     child: ListView.builder(
+                      shrinkWrap: true,
                       itemCount: _answers.length,
                       itemBuilder: (context, index) {
                         final player = _answers.keys.elementAt(index);
@@ -151,21 +201,24 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
                             onPressed: () => _showAnsweringDialog(player),
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              child: Stack(
                                 children: [
-                                  Text(
-                                    player,
-                                    style: TextStyle(
-                                      fontSize: UIDefaults.gameBodyTextSize,
-                                      color: _yesnoColor,
+                                  Center(
+                                    child: Text(
+                                      player,
+                                      style: TextStyle(
+                                        fontSize: UIDefaults.gameBodyTextSize,
+                                        color: _yesnoColor,
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(width: 8.0),
-                                  Icon(
-                                    _answers[player]!.hasAnswered
-                                        ? Icons.check
-                                        : Icons.subdirectory_arrow_left,
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Icon(
+                                      _answers[player]!.hasAnswered
+                                          ? Icons.check
+                                          : Icons.subdirectory_arrow_left,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -178,11 +231,11 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
                 ),
               if (_currentScreen != 3)
                 MyAnimatedSwitcher(
-                  child: Text(
+                  child: UIUtils.htmlToTextWidget(
                     _bodyText,
                     key: ValueKey<String>(_bodyText),
                     textAlign: TextAlign.center,
-                    style: UIDefaults.gameBodyTextStyle,
+                    defaultStyle: UIDefaults.gameBodyTextStyle,
                   ),
                 ),
             ],
