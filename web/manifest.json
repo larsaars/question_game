@@ -6,7 +6,7 @@
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
     "description": "A question game for entertaining groups.",
-    "orientation": "landscape-primary",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {
