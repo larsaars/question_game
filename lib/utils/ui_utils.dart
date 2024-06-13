@@ -172,8 +172,8 @@ class UIUtils {
   }
 
   /// sets the preferred device orientation
-  static void setPreferredOrientation() {
-    SystemChrome.setPreferredOrientations([
+  static Future<void> setPreferredOrientation() async {
+    return await SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);

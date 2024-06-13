@@ -36,7 +36,10 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     }
 
     // set preferred orientation to portrait
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     // pass the reference of the list to the state
     _currentPlayers = GameStateHandler.currentGameState?.players ?? [];

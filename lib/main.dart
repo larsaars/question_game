@@ -23,14 +23,15 @@ Future<void> main() async {
   });
   // register licenses directly on start
   registerLicenses();
-  // start app
-  runApp(const MyApp());
 
   // add locales for timeago
   timeago.setLocaleMessages('de', timeago.DeMessages());
 
   // set preferred orientation
-  UIUtils.setPreferredOrientation();
+  UIUtils.setPreferredOrientation().then((_) {
+    // then run the app
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
