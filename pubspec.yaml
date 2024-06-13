@@ -37,41 +37,40 @@ flutter:
   generate: true
 
   assets:
-    - assets/
-    - assets/imgs/
-    - assets/fonts/
-    - assets/sounds/
-    - assets/question_database/
-    - assets/licenses/
+    - imgs/
+    - fonts/
+    - sounds/
+    - question_database/
+    - licenses/
 
   fonts:
     - family: louis_george_cafe
       fonts:
-        - asset: 'assets/fonts/louis_george_cafe.ttf'
-        - asset: 'assets/fonts/louis_george_cafe_bold.ttf'
+        - asset: 'fonts/louis_george_cafe.ttf'
+        - asset: 'fonts/louis_george_cafe_bold.ttf'
           weight: 700
-        - asset: 'assets/fonts/louis_george_cafe_italic.ttf'
+        - asset: 'fonts/louis_george_cafe_italic.ttf'
           style: italic
-        - asset: 'assets/fonts/louis_george_cafe_bold_italic.ttf'
+        - asset: 'fonts/louis_george_cafe_bold_italic.ttf'
           weight: 700
           style: italic
-        - asset: 'assets/fonts/louis_george_cafe_light.ttf'
+        - asset: 'fonts/louis_george_cafe_light.ttf'
           weight: 300
-        - asset: 'assets/fonts/louis_george_cafe_light_italic.ttf'
+        - asset: 'fonts/louis_george_cafe_light_italic.ttf'
           weight: 300
           style: italic
     - family: alte_haas_grotesk
       fonts:
-        - asset: 'assets/fonts/alte_haas_grotesk_bold.ttf'
+        - asset: 'fonts/alte_haas_grotesk_bold.ttf'
           weight: 700
 
 
 
 flutter_launcher_icons:
-  image_path_android: "assets/imgs/app_icon.png"
+  image_path_android: "imgs/app_icon.png"
   android: true
   web:
     generate: true
-    image_path: "assets/imgs/app_icon.png"
+    image_path: "imgs/app_icon.png"
     background_color: "#ffffff"
     theme_color: "#ffffff"
