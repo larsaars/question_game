@@ -1,22 +1,22 @@
-[debug] [2024-06-13T10:31:51.185Z] ----------------------------------------------------------------------
-[debug] [2024-06-13T10:31:51.186Z] Command:       /usr/local/bin/firebase /home/me/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy
-[debug] [2024-06-13T10:31:51.186Z] CLI Version:   13.11.2
-[debug] [2024-06-13T10:31:51.187Z] Platform:      linux
-[debug] [2024-06-13T10:31:51.187Z] Node Version:  v18.5.0
-[debug] [2024-06-13T10:31:51.187Z] Time:          Thu Jun 13 2024 12:31:51 GMT+0200 (Central European Summer Time)
-[debug] [2024-06-13T10:31:51.187Z] ----------------------------------------------------------------------
+[debug] [2024-06-13T10:38:03.096Z] ----------------------------------------------------------------------
+[debug] [2024-06-13T10:38:03.097Z] Command:       /usr/local/bin/firebase /home/me/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy
+[debug] [2024-06-13T10:38:03.098Z] CLI Version:   13.11.2
+[debug] [2024-06-13T10:38:03.098Z] Platform:      linux
+[debug] [2024-06-13T10:38:03.098Z] Node Version:  v18.5.0
+[debug] [2024-06-13T10:38:03.099Z] Time:          Thu Jun 13 2024 12:38:03 GMT+0200 (Central European Summer Time)
+[debug] [2024-06-13T10:38:03.099Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2024-06-13T10:31:51.239Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-06-13T10:31:51.240Z] > authorizing via signed-in user (lars.lars.specht@gmail.com)
-[debug] [2024-06-13T10:31:51.240Z] [iam] checking project larsaars-question-game for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2024-06-13T10:31:51.241Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions [none]
-[debug] [2024-06-13T10:31:51.242Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions x-goog-quota-user=projects/larsaars-question-game
-[debug] [2024-06-13T10:31:51.242Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2024-06-13T10:31:52.538Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions 200
-[debug] [2024-06-13T10:31:52.538Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2024-06-13T10:31:52.542Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/larsaars-question-game [none]
-[debug] [2024-06-13T10:31:53.264Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/larsaars-question-game 200
-[debug] [2024-06-13T10:31:53.264Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/larsaars-question-game {"projectId":"larsaars-question-game","projectNumber":"903591745750","displayName":"question game","name":"projects/larsaars-question-game","resources":{"hostingSite":"larsaars-question-game"},"state":"ACTIVE","etag":"1_6274869a-2c44-42c5-91a3-64349b0c93ed"}
+[debug] [2024-06-13T10:38:03.154Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-06-13T10:38:03.154Z] > authorizing via signed-in user (lars.lars.specht@gmail.com)
+[debug] [2024-06-13T10:38:03.154Z] [iam] checking project larsaars-question-game for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-06-13T10:38:03.156Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions [none]
+[debug] [2024-06-13T10:38:03.156Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions x-goog-quota-user=projects/larsaars-question-game
+[debug] [2024-06-13T10:38:03.156Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-06-13T10:38:04.181Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions 200
+[debug] [2024-06-13T10:38:04.181Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/larsaars-question-game:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-06-13T10:38:04.182Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/larsaars-question-game [none]
+[debug] [2024-06-13T10:38:04.692Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/larsaars-question-game 200
+[debug] [2024-06-13T10:38:04.692Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/larsaars-question-game {"projectId":"larsaars-question-game","projectNumber":"903591745750","displayName":"question game","name":"projects/larsaars-question-game","resources":{"hostingSite":"larsaars-question-game"},"state":"ACTIVE","etag":"1_6274869a-2c44-42c5-91a3-64349b0c93ed"}
 [info] 
    Thank you for trying our experimental support for Flutter Web on Firebase Hosting.
    While this integration is maintained by Googlers it is not a supported Firebase product.

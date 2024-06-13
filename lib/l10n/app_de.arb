@@ -10,7 +10,7 @@
   "defaultScaffoldInstall": "Als App installieren",
 
   "mainPageStartGame": "SPIELEN",
-  "mainPageChooseCategories": "KATEGORIEN WÄHLEN",
+  "mainPageChooseCategories": "KATEGORIEN",
 
   "chooseCategoriesPageTitle": "Kategorien auswählen",
 
@@ -20,7 +20,7 @@
   "currentPlayersPagePlayerName": "Name",
 
   "gameSelectionPageNewGame": "NEUES SPIEL",
-  "gameSelectionPageContinueLastGame": "LETZTES SPIEL FORTSETZEN",
+  "gameSelectionPageContinueLastGame": "LETZTES SPIEL >>",
   "gameSelectionPageChooseOldGame": "ALTE SPIELE",
 
   "oldGamesListSelectionPageTitle": "Alte Spiele",
