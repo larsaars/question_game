@@ -12,6 +12,7 @@ import 'package:question_game/ui/routes/home_page.dart';
 import 'package:question_game/ui/routes/game_selection/old_games_list_selection_page.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/utils/navigation_utils.dart';
+import 'package:question_game/utils/ui_utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 Future<void> main() async {
@@ -27,6 +28,9 @@ Future<void> main() async {
 
   // add locales for timeago
   timeago.setLocaleMessages('de', timeago.DeMessages());
+
+  // set preferred orientation
+  UIUtils.setPreferredOrientation();
 }
 
 class MyApp extends StatelessWidget {

@@ -13,7 +13,7 @@ class UIDefaults {
 
   static const defaultIconSize = 36.0, defaultButtonHeight = 48.0;
 
-  static const gameTitleTextSize = 60.0, gameBodyTextSize = 30.0;
+  static const gameTitleTextSize = 55.0, gameBodyTextSize = 27.0;
 
   static const gameBodyTextStyle = TextStyle(
     color: UIDefaults.colorGameBodyText,

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:question_game/utils/base_utils.dart';
 import 'package:html/parser.dart' as html_parser;
@@ -168,5 +169,13 @@ class UIUtils {
     }
 
     return TextSpan(children: spans);
+  }
+
+  /// sets the preferred device orientation
+  static void setPreferredOrientation() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
   }
 }

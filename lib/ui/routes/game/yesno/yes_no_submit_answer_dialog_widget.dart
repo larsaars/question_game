@@ -48,7 +48,13 @@ class _YesNoSubmitAnswerDialogWidgetState
 
     return Dialog(
       insetPadding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding, vertical: verticalPadding),
+        horizontal: horizontalPadding,
+        vertical: verticalPadding,
+      ),
+      shape: RoundedRectangleBorder(
+        // set dialog to have no border radius if padding is 0
+        borderRadius: horizontalPadding == 0 ? BorderRadius.zero : BorderRadius.circular(50.0),
+      ),
       child: Center(
         child: MyAnimatedSwitcher(
           transitionType: MyAnimatedSwitcherTransitionType.fade,

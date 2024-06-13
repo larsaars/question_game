@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/utils/navigation_utils.dart';
 
+import '../../utils/ui_utils.dart';
 import '../widgets/default_scaffold.dart';
 
 class CurrentPlayersPage extends StatefulWidget {
@@ -33,6 +34,9 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     if (GameStateHandler.currentGameState == null) {
       NavigationUtils.popWhenPossible(context);
     }
+
+    // set preferred orientation to portrait
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     // pass the reference of the list to the state
     _currentPlayers = GameStateHandler.currentGameState?.players ?? [];
@@ -221,5 +225,8 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     for (final node in _focusNodes) {
       node.dispose();
     }
+
+    // change orientation back to normal
+    UIUtils.setPreferredOrientation();
   }
 }
