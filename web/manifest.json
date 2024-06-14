@@ -2,7 +2,7 @@
     "name": "Question Game",
     "short_name": "Question Game",
     "start_url": ".",
-    "display": "standalone",
+    "display": "fullscreen",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
     "description": "A question game for entertaining groups.",
