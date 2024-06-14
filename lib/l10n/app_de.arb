@@ -15,7 +15,7 @@
 
   "chooseCategoriesPageTitle": "Kategorien auswählen",
 
-  "currentPlayersPageTitle": "Spieler hinzufügen",
+  "currentPlayersPageTitle": "Spieler*innen hinzufügen",
   "currentPlayersPageButtonAddPlayer": "Spieler*innen hinzufügen",
   "currentPlayersPageButtonDoneAdding": "Fertig",
   "currentPlayersPagePlayerName": "Name",
@@ -42,8 +42,8 @@
   "gameStartBombButton": "Bombe starten",
   "gameTitleTextYesNo": "JA oder NEIN",
   "gameYesNoExplanation1": "Es folgt eine Aussage, die sich entweder mit \"Ja\" oder mit \"Nein\" beantworten lässt. Lest diese laut vor und macht euch kurz darüber Gedanken, wie ihr persönlich dazu steht - allerdings ohne euch auszutauschen! Folgt danach den Anweisungen auf dem Display.",
-  "gameYesNoExplanation2": "Reicht nun das Handy herum und gebt an, wie ihr zu der Aussage steht und von wie vielen eurer Mitspieler ihr denkt, dass sie die Frage mit \"Ja\" beantworten. Andere Mitspieler können eure Antwort nicht sehen! Wer richtig liegt bekommt Punkte!",
-  "gameYesNoAnswersReady": "Alle Spieler haben geantwortet. Seid ihr bereit für die Antwort?",
+  "gameYesNoExplanation2": "Reicht nun das Handy herum und gebt an, wie ihr zu der Aussage steht und von wie vielen eurer Mitspieler*innen ihr denkt, dass sie die Frage mit \"Ja\" beantworten. Andere Mitspieler*innen können eure Antwort nicht sehen! Wer richtig liegt bekommt Punkte!",
+  "gameYesNoAnswersReady": "Alle Personen haben geantwortet. Seid ihr bereit für die Antwort?",
   "gameYesNoYourGuess": "Deine Schätzung, wie viele Personen auf diese Frage mit JA antworten:",
   "gameYesNoPlayerAnsweredYes": "<b>{count, plural, =1{Spieler hat} other{Spieler haben}} JA geantwortet.</b>",
   "gameYesNoPlayerGuessedCorrectly": "{count, plural, =1{<b>{playerNames}</b> hat richtig getippt und bekommt} other{<b>{playerNames}</b> haben richtig getippt und bekommen}} drei Punkte.",

@@ -103,7 +103,7 @@ class UIUtils {
     final screenHeight = mediaQuery.size.height;
 
     // if is a small screen, set no padding
-    if (screenWidth < 860) {
+    if (screenWidth < 926) {
       return [0.0, 0.0];
     } else {
       // if is a large screen, set padding
