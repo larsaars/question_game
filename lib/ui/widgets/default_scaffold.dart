@@ -11,6 +11,10 @@ import 'package:question_game/utils/ui_utils.dart';
 // default scaffold as outermost widget to embed other widgets
 // contains a back button and a child widget
 class DefaultScaffold extends StatelessWidget {
+  // Static boolean which defines if the currently visible scaffold
+  // uses padding or not. This changes the layout choices on home and game selection page.
+  static bool usesPadding = true;
+
   // child widget to be displayed in the scaffold
   final Widget child;
 
@@ -70,6 +74,9 @@ class DefaultScaffold extends StatelessWidget {
     final loc = AppLocalizations.of(context);
     final [horizontalPadding, verticalPadding] =
         UIUtils.determinePadding(context, forDefaultScaffold: true);
+
+    // update static bool for padding usage
+    usesPadding = horizontalPadding > 0;
 
     return Scaffold(
       backgroundColor: UIDefaults.backgroundColor,

@@ -12,7 +12,7 @@ class GameSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context);
+    final localizations = AppLocalizations.of(context);
     bool hasMoreThanOneSavedGameStates =
         GameStateHandler.getSavedGameStatesCount() > 1;
 
@@ -25,21 +25,23 @@ class GameSelectionPage extends StatelessWidget {
             children: [
               CenteredTextIconButton(
                 icon: Icons.fiber_new,
-                text: loc!.gameSelectionPageNewGame,
+                text: localizations!.gameSelectionPageNewGame,
                 textColor: UIDefaults.colorPrimary,
                 iconColor: UIDefaults.colorPrimary,
                 onPressed: () {
                   // load new game state and then navigate to
                   // enter the player names
                   GameStateHandler.playNewGame();
-                  Navigator.pushNamed(context, '/current-players', arguments: {
-                    'comingFrom': 'game-selection'
-                  });
+                  Navigator.pushNamed(context, '/current-players',
+                      arguments: {'comingFrom': 'game-selection'});
                 },
               ),
               CenteredTextIconButton(
                 icon: Icons.last_page,
-                text: loc.gameSelectionPageContinueLastGame,
+                text: DefaultScaffold.usesPadding
+                    ? localizations.gameSelectionPageContinueLastGameWithPadding
+                    : localizations
+                        .gameSelectionPageContinueLastGameWithoutPadding,
                 onPressed: () {
                   // load last game state and then navigate to game
                   GameStateHandler.playLastGame();
@@ -49,7 +51,7 @@ class GameSelectionPage extends StatelessWidget {
               if (hasMoreThanOneSavedGameStates)
                 CenteredTextIconButton(
                   icon: Icons.list,
-                  text: loc.gameSelectionPageChooseOldGame,
+                  text: localizations.gameSelectionPageChooseOldGame,
                   onPressed: () =>
                       Navigator.pushNamed(context, '/old-games-list'),
                 ),

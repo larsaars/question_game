@@ -2,11 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/utils/base_utils.dart';
-import 'package:question_game/utils/ui_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../database/database_handler.dart';
@@ -21,6 +19,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // app strings
+  AppLocalizations? localizations;
+
   late Timer _timer;
   String _titleText = '';
   String? _defaultTitleText;
@@ -34,25 +35,27 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     // load on start everything that has to be loaded
-    _onStartLoading().then((value) => setState(() {
-          _loading = false;
+    _onStartLoading().then(
+      (value) => setState(() {
+        _loading = false;
 
-          // after that,
-          // create a timer that changes the text every n seconds
-          // for the title to blink with a "!" at the end
-          _timer = Timer.periodic(const Duration(milliseconds: 700), (timer) {
-            setState(() {
-              // update text field
-              _withBang = !_withBang;
+        // after that,
+        // create a timer that changes the text every n seconds
+        // for the title to blink with a "!" at the end
+        _timer = Timer.periodic(const Duration(milliseconds: 700), (timer) {
+          setState(() {
+            // update text field
+            _withBang = !_withBang;
 
-              if (_withBang) {
-                _titleText = '$_defaultTitleText!';
-              } else {
-                _titleText = _defaultTitleText ?? '';
-              }
-            });
+            if (_withBang) {
+              _titleText = '$_defaultTitleText!';
+            } else {
+              _titleText = _defaultTitleText ?? '';
+            }
           });
-        }));
+        });
+      }),
+    );
   }
 
   @override
@@ -71,9 +74,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    localizations ??= AppLocalizations.of(context);
+
     // default title text can only be here set (not in initState)
     // since it requires the context which is not available before
-    _defaultTitleText ??= _titleText = AppLocalizations.of(context)!.appTitle;
+    _defaultTitleText ??= _titleText = localizations!.appTitle;
 
     return DefaultScaffold(
       backButton: false,
@@ -101,16 +106,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     CenteredTextIconButton(
                       icon: Icons.videogame_asset,
-                      text: AppLocalizations.of(context)!.mainPageStartGame,
+                      text: localizations!.mainPageStartGame,
                       textColor: UIDefaults.colorPrimary,
                       iconColor: UIDefaults.colorPrimary,
                       onPressed: () {
                         // if there are no saved game states, start a new game
                         if (GameStateHandler.getSavedGameStatesCount() == 0) {
                           GameStateHandler.playNewGame();
-                          Navigator.pushNamed(context, '/current-players', arguments: {
-                            'comingFrom': 'home-page'
-                          });
+                          Navigator.pushNamed(context, '/current-players',
+                              arguments: {'comingFrom': 'home-page'});
                         } else {
                           // else go into game selection
                           Navigator.pushNamed(context, '/game-selection');
@@ -119,8 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     CenteredTextIconButton(
                       icon: Icons.category,
-                      text: AppLocalizations.of(context)!
-                          .mainPageChooseCategories,
+                      text: DefaultScaffold.usesPadding
+                          ? localizations!.mainPageChooseCategoriesWithPadding
+                          : localizations!
+                              .mainPageChooseCategoriesWithoutPadding,
                       onPressed: () =>
                           Navigator.pushNamed(context, '/categories'),
                     ),

@@ -10,7 +10,8 @@
   "defaultScaffoldInstall": "Als App installieren",
 
   "mainPageStartGame": "SPIELEN",
-  "mainPageChooseCategories": "KATEGORIEN",
+  "mainPageChooseCategoriesWithoutPadding": "KATEGORIEN",
+  "mainPageChooseCategoriesWithPadding": "KATEGORIEN AUSWÄHLEN",
 
   "chooseCategoriesPageTitle": "Kategorien auswählen",
 
@@ -20,12 +21,13 @@
   "currentPlayersPagePlayerName": "Name",
 
   "gameSelectionPageNewGame": "NEUES SPIEL",
-  "gameSelectionPageContinueLastGame": "LETZTES SPIEL >>",
+  "gameSelectionPageContinueLastGameWithoutPadding": "LETZTES SPIEL",
+  "gameSelectionPageContinueLastGameWithPadding": "LETZTES SPIEL FORTSETZEN",
   "gameSelectionPageChooseOldGame": "ALTE SPIELE",
 
   "oldGamesListSelectionPageTitle": "Alte Spiele",
   "oldGamesListSelectionPageMorePlayers": "weitere Spieler*innen",
-  "oldGamesListSelectionPageQuestionsPlayed": "gepielte Fragen",
+  "oldGamesListSelectionPageQuestionsPlayed": "Fragen gepielt",
 
   "gameExit": "Spiel verlassen",
   "gameSkip": "Frage überspringen",
