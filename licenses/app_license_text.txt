@@ -2,7 +2,7 @@ Contact me via mail:
 lars.lars.specht@gmail.com
 
 The source code is available on GitHub:
-https://github.com/larsaars/flutter_question_game
+https://github.com/larsaars/question_game
 
 Copyright 2024 Lars Specht
 
