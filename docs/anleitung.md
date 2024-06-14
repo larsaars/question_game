@@ -17,16 +17,16 @@ Beispiel: "Ich glaube an das Testen von Medikamenten an Menschen."
 ## Hauptmenü
 Man startet das Spiel (z.B. auf der Website) und wird mit dem Hauptmenü begrüßt. Dort hat man die Möglichkeit, auf "SPIELEN" oder "KATEGORIEN AUSWÄHLEN" zu klicken.
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/home_page.png" alt="home page" width="40%">
-    <p style="text-align: center;">Hauptmenü</p>
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/home_page.png" alt="home page" width="80%">
+    <p align="center" style="text-align: center;">Hauptmenü</p>
 </div>
 Kategorien wählen
 Entscheidet man sich dazu, auf "KATEGORIEN AUSWÄHLEN" zu drücken, so landet man auf einer Seite, auf der man auswählen kann, mit welchen Kategorien gespielt wird, sollte ein neues Spiel gestartet werden.
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/categories_page.png" alt="categories page" width="40%">
-    <p style="text-align: center;">Kategorien-Auswählen-Seite: Jeweilige (De-)Aktivierung der verschiedenen Spiele-Kategorien</p>
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/categories_page.png" alt="categories page" width="80%">
+    <p align="center" style="text-align: center;">Kategorien-Auswählen-Seite: Jeweilige (De-)Aktivierung der verschiedenen Spiele-Kategorien</p>
 </div>
 
 ## Ein neues Spiel starten
@@ -43,16 +43,16 @@ Einen alten Spielstand fortzusetzen, bedeutet, dass
 
 Anmerkung: Die Liste aktiver Mitspieler kann jederzeit im Spiel selbst verändert werden.
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/game_selection/game_selection_page.png" alt="game selection page" width="40%">
-    <p style="text-align: center;">Spiele-Auswahl-Seite</p>
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/game_selection/game_selection_page.png" alt="game selection page" width="80%">
+    <p align="center" style="text-align: center;">Spiele-Auswahl-Seite</p>
 </div>
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/game_selection/current_players_page.png" alt="current players page" width="40%">
-    <p style="text-align: center;">Mitspieler-Seite</p>
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/game_selection/current_players_page.png" alt="current players page" width="80%">
+    <p align="center" style="text-align: center;">Mitspieler-Seite</p>
 </div>
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/game_selection/old_games_list_page.png" alt="old games list page" width="40%">
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/game_selection/old_games_list_page.png" alt="old games list page" width="80%">
     <p align="center" style="text-align: center;">Alte Spiele Liste</p>
 </div>
 
@@ -60,41 +60,41 @@ Anmerkung: Die Liste aktiver Mitspieler kann jederzeit im Spiel selbst veränder
 
 ### Frage
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/question.png" alt="questions screen1" width="40%">
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/question.png" alt="questions screen1" width="80%">
 </div>
 
 ### Challenge
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/challenge/screen1.png" alt="challenge screen1" width="40%">
-    <img src="screenshots/challenge/screen2.png" alt="challenge screen2" width="40%">
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/challenge/screen1.png" alt="challenge screen1" width="80%">
+    <img src="screenshots/challenge/screen2.png" alt="challenge screen2" width="80%">
 </div>
 
 ### Abstimmung
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/poll/screen1.png" alt="poll screen1" width="40%">
-    <img src="screenshots/poll/screen2.png" alt="poll screen2" width="40%">
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/poll/screen1.png" alt="poll screen1" width="80%">
+    <img src="screenshots/poll/screen2.png" alt="poll screen2" width="80%">
 </div>
 
 ### Bombe
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/bomb/screen1.png" alt="bomb screen1" width="40%">
-    <img src="screenshots/bomb/screen2.png" alt="bomb screen2" width="40%">
-    <img src="screenshots/bomb/screen3.png" alt="bomb screen3" width="40%">
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/bomb/screen1.png" alt="bomb screen1" width="80%">
+    <img src="screenshots/bomb/screen2.png" alt="bomb screen2" width="80%">
+    <img src="screenshots/bomb/screen3.png" alt="bomb screen3" width="80%">
 </div>
 
 ### Ja oder Nein
 
-<div style="display: inline-block; margin: 10px; text-align: center;">
-    <img src="screenshots/yesno/screen1.png" alt="yesno screen1" width="40%">
-    <img src="screenshots/yesno/screen2.png" alt="yesno screen2" width="40%">
-    <img src="screenshots/yesno/screen3.png" alt="yesno screen3" width="40%">
-    <img src="screenshots/yesno/screen4.png" alt="yesno screen4" width="40%">
-    <img src="screenshots/yesno/screen5.png" alt="yesno screen5" width="40%">
-    <img src="screenshots/yesno/screen6.png" alt="yesno screen6" width="40%">
-    <img src="screenshots/yesno/screen7.png" alt="yesno screen7" width="40%">
-    <img src="screenshots/yesno/screen8.png" alt="yesno screen8" width="40%">
+<div align="center" style="display: inline-block; margin: 10px; text-align: center;">
+    <img src="screenshots/yesno/screen1.png" alt="yesno screen1" width="80%">
+    <img src="screenshots/yesno/screen2.png" alt="yesno screen2" width="80%">
+    <img src="screenshots/yesno/screen3.png" alt="yesno screen3" width="80%">
+    <img src="screenshots/yesno/screen4.png" alt="yesno screen4" width="80%">
+    <img src="screenshots/yesno/screen5.png" alt="yesno screen5" width="80%">
+    <img src="screenshots/yesno/screen6.png" alt="yesno screen6" width="80%">
+    <img src="screenshots/yesno/screen7.png" alt="yesno screen7" width="80%">
+    <img src="screenshots/yesno/screen8.png" alt="yesno screen8" width="80%">
 </div>
