@@ -5,6 +5,12 @@ A question game for entertaining groups programmed with [flutter](https://flutte
 This project was depeloped in the summer semester 2024 for the course "Ausgewählte Projekte der Informatik" (short DAPI)  at [OTH Regensburg](https://www.oth-regensburg.de/).
 The app is as of now purely in German.
 
+## Docs
+
+- For a simple overview of the functionality of the project, please refer to [Anleitung mit Bilder (German)](doc/anleitung.md) article.
+- For a general overview of the project structure, please refer to [Project Structure](doc/project_structure.md) article.
+- For detailed code documentation, please refer to the folder [doc/api](doc/api/index.html).
+
 ## Executing
 ### Website
 

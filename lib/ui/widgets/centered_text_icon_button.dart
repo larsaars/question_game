@@ -1,13 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 
+/// A custom widget that displays an icon and a text in a centered alignment.
+/// The icon is displayed to the left of the text.
+/// The widget is a button that triggers a callback when pressed.
 class CenteredTextIconButton extends StatelessWidget {
+  /// The text to be displayed.
   final String text;
-  final IconData icon;
-  final VoidCallback onPressed;
-  final double height, iconSize, textSidePadding;
-  final Color iconColor, textColor;
 
+  /// The icon to be displayed.
+  final IconData icon;
+
+  /// The callback to be triggered when the button is pressed.
+  final VoidCallback onPressed;
+
+  /// The height of the button.
+  final double height;
+
+  /// The size of the icon.
+  final double iconSize;
+
+  /// The padding on the sides of the text.
+  final double textSidePadding;
+
+  /// The color of the icon.
+  final Color iconColor;
+
+  /// The color of the text.
+  final Color textColor;
+
+  /// Creates a new instance of the widget.
+  ///
+  /// The [icon], [text], and [onPressed] arguments are required.
+  /// The [iconColor], [textColor], [height], [iconSize], and [textSidePadding] arguments are optional.
   const CenteredTextIconButton({
     super.key,
     required this.icon,
@@ -20,6 +45,10 @@ class CenteredTextIconButton extends StatelessWidget {
     this.textSidePadding = UIDefaults.defaultButtonHeight,
   });
 
+  /// Builds the widget.
+  ///
+  /// The widget is composed of an [ElevatedButton] that contains a [Stack].
+  /// The [Stack] contains an [Icon] and a [Row] with the text.
   @override
   Widget build(BuildContext context) {
     return Padding(

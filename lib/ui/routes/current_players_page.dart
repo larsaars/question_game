@@ -8,6 +8,8 @@ import 'package:question_game/utils/navigation_utils.dart';
 import '../../utils/ui_utils.dart';
 import '../widgets/default_scaffold.dart';
 
+/// This class represents the Current Players Page in the application.
+/// It extends StatefulWidget, which means this widget can change over time.
 class CurrentPlayersPage extends StatefulWidget {
   const CurrentPlayersPage({super.key});
 
@@ -15,8 +17,8 @@ class CurrentPlayersPage extends StatefulWidget {
   State<CurrentPlayersPage> createState() => _CurrentPlayersPageState();
 }
 
-// because the context is somehow not correct
-// must be fixed
+/// This class represents the state of the Current Players Page.
+/// It extends State<CurrentPlayersPage> and includes SingleTickerProviderStateMixin for animation control.
 class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     with SingleTickerProviderStateMixin {
   final _listKey = GlobalKey<AnimatedListState>();
@@ -58,6 +60,8 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     });
   }
 
+  /// This method builds a player item widget.
+  /// It takes a player name, an animation, and an index as parameters.
   Widget _buildPlayerItem(
       String player, Animation<double> animation, int index) {
     return SlideTransition(
@@ -98,6 +102,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     );
   }
 
+  /// This method adds a new player to the list.
   void _addPlayer() {
     setState(() {
       // add focus node to list
@@ -119,6 +124,8 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     });
   }
 
+  /// This method removes a player from the list.
+  /// It takes an index as a parameter.
   void _removePlayer(int index) {
     setState(() {
       // remove from list
@@ -137,6 +144,7 @@ class _CurrentPlayersPageState extends State<CurrentPlayersPage>
     });
   }
 
+  /// This method handles the event when the "Done Adding" button is pressed.
   void _doneAddingPressed() {
     // the done adding button is pressed
     // depending on where we come from, navigate to the correct route

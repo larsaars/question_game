@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:question_game/database/database_handler.dart';
 import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
@@ -11,6 +10,8 @@ import 'package:question_game/utils/ui_utils.dart';
 import '../../../database/gamestate.dart';
 import '../../widgets/my_animated_switcher.dart';
 
+/// MainGamePage is a StatefulWidget that represents the main game page.
+/// It manages the game state and handles the game logic.
 class MainGamePage extends StatefulWidget {
   const MainGamePage({super.key});
 
@@ -18,6 +19,8 @@ class MainGamePage extends StatefulWidget {
   State<MainGamePage> createState() => _MainGamePageState();
 }
 
+/// _MainGamePageState is the state for MainGamePage.
+/// It handles the game logic and updates the UI based on the game state.
 class _MainGamePageState extends State<MainGamePage> with RouteAware {
   // if shows the loading circle (on prepareGameState)
   bool _loading = true;
@@ -94,9 +97,8 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
     }
   }
 
-  // on second tap show the question
-  // integrate into app_de.arb
-  // add bomb and yes/no pages though
+  /// _nextQuestion handles the logic for loading the next question.
+  /// It checks the category of the current question and updates the UI accordingly.
   void _nextQuestion() {
     // if the current question still  needs a second tap,
     // don't directly load
@@ -167,6 +169,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
     }
   }
 
+  /// _editPlayerList navigates to the current players page.
   void _editPlayerList() {
     // navigate to the current players page
     // and declare that it is coming from the main game

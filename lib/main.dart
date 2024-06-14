@@ -1,3 +1,4 @@
+// Import necessary packages
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pwa_install/pwa_install.dart';
@@ -15,6 +16,9 @@ import 'package:question_game/utils/navigation_utils.dart';
 import 'package:question_game/utils/ui_utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+/// The main function of the application.
+/// It ensures Flutter binding is initialized, registers PWA class and licenses,
+/// sets preferred orientation, and then runs the app.
 Future<void> main() async {
   // Ensure Flutter binding is initialized
   WidgetsFlutterBinding.ensureInitialized(); // register pwa class
@@ -34,9 +38,15 @@ Future<void> main() async {
   });
 }
 
+/// The main widget of the application.
+/// It returns a MaterialApp widget with specified properties.
 class MyApp extends StatelessWidget {
+  // Constructor
   const MyApp({super.key});
 
+  /// The build method of the MyApp class.
+  /// It returns a MaterialApp widget with specified properties such as title, localizationsDelegates,
+  /// supportedLocales, theme, navigatorObservers, and routes.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

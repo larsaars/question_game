@@ -9,6 +9,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../utils/navigation_utils.dart';
 import '../../widgets/default_scaffold.dart';
 
+/// A page that simulates a game with a bomb.
+/// The bomb has a timer that counts down to an explosion.
+/// The page also includes audio effects for ticking and explosion.
 class GameBombPage extends StatefulWidget {
   const GameBombPage({super.key});
 
@@ -17,37 +20,37 @@ class GameBombPage extends StatefulWidget {
 }
 
 class _GameBombPageState extends State<GameBombPage> {
-  // the timer waiting for the bomb to explode
+  // The timer waiting for the bomb to explode
   Timer? _explosionTimer;
 
-  // audio players for ticking and explosion
+  // Audio players for ticking and explosion
   final _explosionAudioPlayer = AudioPlayer(),
       _tickingAudioPlayer = AudioPlayer();
 
-  // app strings
+  // App strings
   AppLocalizations? localizations;
 
   @override
   void initState() {
     super.initState();
 
-    // pop to last route if there is no game state
+    // Pop to last route if there is no game state
     if (GameStateHandler.currentGameState == null) {
       NavigationUtils.popWhenPossible(context);
     }
 
-    // set explosion audio source, after loading, start the countdown timer (30-60 seconds)
+    // Set explosion audio source, after loading, start the countdown timer (30-60 seconds)
     _explosionAudioPlayer.setAsset('sounds/bomb_explosion.mp3').then((_) {
       _explosionTimer =
           Timer(Duration(seconds: 30 + BaseUtils.random.nextInt(31)), () {
-        // stop the ticking sound
+        // Stop the ticking sound
         _tickingAudioPlayer.stop();
-        // when the timer is done, play the explosion sound and pop the page
+        // When the timer is done, play the explosion sound and pop the page
         _explosionAudioPlayer.play().then((_) => NavigationUtils.popWhenPossible(context));
       });
     });
 
-    // set ticking audio source, after loading, start the ticking sound (in a looping mode)
+    // Set ticking audio source, after loading, start the ticking sound (in a looping mode)
     _tickingAudioPlayer.setAsset('sounds/bomb_ticking_5secs.wav').then((_) {
       _tickingAudioPlayer
           .setLoopMode(LoopMode.one)
@@ -57,10 +60,10 @@ class _GameBombPageState extends State<GameBombPage> {
 
   @override
   void dispose() {
-    // cancel explosion timer
+    // Cancel explosion timer
     _explosionTimer?.cancel();
 
-    // dispose audio players
+    // Dispose audio players
     _explosionAudioPlayer.dispose();
     _tickingAudioPlayer.dispose();
 
@@ -72,7 +75,7 @@ class _GameBombPageState extends State<GameBombPage> {
     localizations ??= AppLocalizations.of(context);
 
     return PopScope(
-      onPopInvoked: (_) => false, // ignore back button
+      onPopInvoked: (_) => false, // Ignore back button
       child: DefaultScaffold(
         backButtonIcon: Icons.close,
         backButtonFunction: () => NavigationUtils.fromGamePopTillMain(context),

@@ -8,6 +8,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../database/gamestate.dart';
 
+/// A page for selecting old games from a list.
 class OldGamesListSelectionPage extends StatefulWidget {
   const OldGamesListSelectionPage({super.key});
 
@@ -16,6 +17,7 @@ class OldGamesListSelectionPage extends StatefulWidget {
       _OldGamesListSelectionPageState();
 }
 
+/// The state for [OldGamesListSelectionPage].
 class _OldGamesListSelectionPageState extends State<OldGamesListSelectionPage>
     with SingleTickerProviderStateMixin {
   late List<GameState> _gameStates;
@@ -42,6 +44,10 @@ class _OldGamesListSelectionPageState extends State<OldGamesListSelectionPage>
     super.dispose();
   }
 
+  /// Removes a game state from the list.
+  ///
+  /// The game state is removed from both the in-memory list and the animated list.
+  /// The list is marked as changed, so it will be saved to the database when the widget is disposed.
   void _removeGameState(int index) {
     // remove from ram list, re-save list on dispose (if changed)
     setState(() {
@@ -57,6 +63,11 @@ class _OldGamesListSelectionPageState extends State<OldGamesListSelectionPage>
     });
   }
 
+  /// Builds a list item for a game state.
+  ///
+  /// The list item includes the game state's players, the time it was last played, and the number of questions played.
+  /// Tapping the list item loads the game state and navigates to the main game page.
+  /// The list item also includes a delete button that removes the game state from the list.
   Widget _buildGameStateItem(
       GameState gameState, Animation<double> animation, int index) {
     return SlideTransition(
@@ -93,6 +104,9 @@ class _OldGamesListSelectionPageState extends State<OldGamesListSelectionPage>
     );
   }
 
+  /// Builds the widget.
+  ///
+  /// The widget includes a scaffold with a title and an animated list of game states.
   @override
   Widget build(BuildContext context) {
     localizations ??= AppLocalizations.of(context)!;

@@ -5,12 +5,14 @@ import 'package:question_game/utils/base_utils.dart';
 
 import 'database_handler.dart';
 
-/// used to save and load the game states
+/// Class used to handle game states, including saving, loading, and playing games.
 class GameStateHandler {
+  /// The current game state.
   static GameState? currentGameState;
 
+  /// Starts a new game with the active categories.
   static void playNewGame() {
-    // get the categories that are active from prefs
+    // Get the categories that are active from prefs
     // (they are saved in prefs with the keys 'category_N')
     List<String> categoriesActive = [];
     for (var categoryKey in DataBaseHandler.categoriesDescriptor.keys) {
@@ -19,44 +21,44 @@ class GameStateHandler {
       }
     }
 
+    // Create a new game state with the active categories
     currentGameState = GameState(categoriesActive);
   }
 
+  /// Loads the last (latest) played game state.
   static void playLastGame() {
-    // load the last (latest) played game state
     currentGameState = getSavedGameStates().firstOrNull;
   }
 
+  /// Loads an old game state.
   static void playOldGame(GameState state) {
     currentGameState = state;
   }
 
-  /// save the current game state
-  /// to the shared preferences
-  /// and make sure to replace the old game state (uuid)
-  /// if it has been played before
+  /// Saves the current game state to the shared preferences.
+  /// If the game state has been played before, it replaces the old game state.
   static void save() {
-    // if the current game state is null, do nothing
+    // If the current game state is null, do nothing
     if (currentGameState == null) {
       return;
     }
 
-    // add the current time stamp to the game state
+    // Add the current time stamp to the game state
     currentGameState!.lastPlayed = DateTime.now().millisecondsSinceEpoch;
 
-    // load all old game states
+    // Load all old game states
     final savedGameStates = getSavedGameStates();
 
-    // remove the old game state if it exists
+    // Remove the old game state if it exists
     savedGameStates.removeWhere((element) => element.gameId == currentGameState!.gameId);
-    // add the current game state
+    // Add the current game state
     savedGameStates.add(currentGameState!);
-    // save the game states
+    // Save the game states
     saveGameStateList(savedGameStates);
   }
 
-  /// save the game states to the shared preferences
-  /// overwrites whole list
+  /// Saves the list of game states to the shared preferences.
+  /// This overwrites the whole list.
   static void saveGameStateList(List<GameState> gameStates) {
     BaseUtils.prefs?.setStringList(
       'gameStates',
@@ -64,23 +66,25 @@ class GameStateHandler {
     );
   }
 
+  /// Returns the count of saved game states.
   static int getSavedGameStatesCount() {
     return BaseUtils.prefs?.getStringList('gameStates')?.length ?? 0;
   }
 
-  /// loads the game states from the shared preferences
-  /// and returns them sorted by the last played timestamp
+  /// Loads the game states from the shared preferences.
+  /// Returns them sorted by the last played timestamp.
   static List<GameState> getSavedGameStates() {
-    // load the game states from the shared preferences
+    // Load the game states from the shared preferences
     final gameStates = <GameState>[];
     final savedGameStatesAsStringList =
         BaseUtils.prefs?.getStringList('gameStates') ?? [];
 
+    // Convert each game state string to a GameState object
     for (final gameStateString in savedGameStatesAsStringList) {
       gameStates.add(GameState.fromJson(jsonDecode(gameStateString)));
     }
 
-    // sort by the last played timestamp
+    // Sort by the last played timestamp
     gameStates.sort((a, b) => b.lastPlayed.compareTo(a.lastPlayed));
 
     return gameStates;

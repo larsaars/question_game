@@ -11,6 +11,7 @@ import '../../../../utils/navigation_utils.dart';
 import '../../../../utils/ui_utils.dart';
 import '../../../ui_defaults.dart';
 
+/// A StatefulWidget that represents the Yes/No game page.
 class GameYesNoPage extends StatefulWidget {
   const GameYesNoPage({super.key});
 
@@ -18,6 +19,7 @@ class GameYesNoPage extends StatefulWidget {
   State<GameYesNoPage> createState() => _GameYesNoPageState();
 }
 
+/// The state of the [GameYesNoPage].
 class _GameYesNoPageState extends State<GameYesNoPage> {
   // app strings
   AppLocalizations? localizations;
@@ -49,6 +51,9 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
     });
   }
 
+  /// Handles the onTap event.
+  ///
+  /// If [updateCounter] is true, the screen counter will be updated.
   void _onTap({updateCounter = true}) {
     // if is on screen 3, do nothing on tap
     // (screen 3 will be handled by list of players and their answers and guesses)
@@ -121,7 +126,9 @@ class _GameYesNoPageState extends State<GameYesNoPage> {
     }
   }
 
-  /// shows the dialog in which the answer and guess will be submitted
+  /// Shows the dialog in which the answer and guess will be submitted.
+  ///
+  /// [player] is the name of the player who will submit the answer and guess.
   void _showAnsweringDialog(String player) {
     showDialog(
       context: context,

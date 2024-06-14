@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
 
+/// Enum for defining the type of transition to be used in [MyAnimatedSwitcher].
 enum MyAnimatedSwitcherTransitionType { scale, fade, slide }
 
+/// A custom widget that wraps the [AnimatedSwitcher] widget.
+/// It allows for different types of transitions: scale, fade, and slide.
 class MyAnimatedSwitcher extends StatelessWidget {
+  /// The child widget to be displayed.
   final Widget child;
+
+  /// The type of transition to be used.
   final MyAnimatedSwitcherTransitionType transitionType;
 
+  /// Creates a new instance of the widget.
+  ///
+  /// The [child] argument is required.
+  /// The [transitionType] argument is optional and defaults to [MyAnimatedSwitcherTransitionType.scale].
   const MyAnimatedSwitcher({
     super.key,
     required this.child,
     this.transitionType = MyAnimatedSwitcherTransitionType.scale,
   });
 
+  /// Builds the widget.
+  ///
+  /// The widget is composed of an [AnimatedSwitcher] that contains the child widget.
+  /// The transition of the [AnimatedSwitcher] is determined by the [transitionType].
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(

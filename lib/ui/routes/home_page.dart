@@ -11,15 +11,20 @@ import '../../database/database_handler.dart';
 import '../widgets/centered_text_icon_button.dart';
 import '../widgets/default_scaffold.dart';
 
+/// The home page of the application.
+/// It extends [StatefulWidget] which means it maintains state that can change over time.
 class MyHomePage extends StatefulWidget {
+  // Constructor
   const MyHomePage({super.key});
 
+  // Creates the mutable state for this widget at a given location in the tree.
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+/// The logic and internal state for a [MyHomePage] widget.
 class _MyHomePageState extends State<MyHomePage> {
-  // app strings
+  // App strings
   AppLocalizations? localizations;
 
   late Timer _timer;
@@ -30,21 +35,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool _loading = true;
 
+  // Called when this object is inserted into the tree.
   @override
   void initState() {
     super.initState();
 
-    // load on start everything that has to be loaded
+    // Load on start everything that has to be loaded
     _onStartLoading().then(
       (value) => setState(() {
         _loading = false;
 
-        // after that,
+        // After that,
         // create a timer that changes the text every n seconds
         // for the title to blink with a "!" at the end
         _timer = Timer.periodic(const Duration(milliseconds: 700), (timer) {
           setState(() {
-            // update text field
+            // Update text field
             _withBang = !_withBang;
 
             if (_withBang) {
@@ -58,25 +64,27 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // Called when this object is removed from the tree permanently.
   @override
   void dispose() {
     super.dispose();
-    // cancel timer when the widget is disposed
+    // Cancel timer when the widget is disposed
     _timer.cancel();
   }
 
+  // Load the categories descriptor on app start
+  // as well once an instance of shared prefs
   Future _onStartLoading() async {
-    // load the categories descriptor on app start
     await DataBaseHandler.loadCategoriesDescriptor();
-    // as well once an instance of shared prefs
     BaseUtils.prefs = await SharedPreferences.getInstance();
   }
 
+  // Describes the part of the user interface represented by this widget.
   @override
   Widget build(BuildContext context) {
     localizations ??= AppLocalizations.of(context);
 
-    // default title text can only be here set (not in initState)
+    // Default title text can only be here set (not in initState)
     // since it requires the context which is not available before
     _defaultTitleText ??= _titleText = localizations!.appTitle;
 
@@ -110,13 +118,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       textColor: UIDefaults.colorPrimary,
                       iconColor: UIDefaults.colorPrimary,
                       onPressed: () {
-                        // if there are no saved game states, start a new game
+                        // If there are no saved game states, start a new game
                         if (GameStateHandler.getSavedGameStatesCount() == 0) {
                           GameStateHandler.playNewGame();
                           Navigator.pushNamed(context, '/current-players',
                               arguments: {'comingFrom': 'home-page'});
                         } else {
-                          // else go into game selection
+                          // Else go into game selection
                           Navigator.pushNamed(context, '/game-selection');
                         }
                       },

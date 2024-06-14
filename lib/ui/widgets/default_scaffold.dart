@@ -5,48 +5,52 @@ import 'package:pwa_install/pwa_install.dart';
 import 'package:question_game/ui/routes/about.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:question_game/ui/ui_defaults.dart';
-import 'package:question_game/utils/base_utils.dart';
 import 'package:question_game/utils/ui_utils.dart';
 
-// default scaffold as outermost widget to embed other widgets
-// contains a back button and a child widget
+/// Default scaffold as outermost widget to embed other widgets.
+/// Contains a back button and a child widget.
 class DefaultScaffold extends StatelessWidget {
-  // Static boolean which defines if the currently visible scaffold
-  // uses padding or not. This changes the layout choices on home and game selection page.
+  /// Static boolean which defines if the currently visible scaffold
+  /// uses padding or not. This changes the layout choices on home and game selection page.
   static bool usesPadding = true;
 
-  // child widget to be displayed in the scaffold
+  /// Child widget to be displayed in the scaffold.
   final Widget child;
 
-  // action button to be displayed in the bottom right corner (null if none)
+  /// Action button to be displayed in the bottom right corner (null if none).
   final Widget? actionButton;
 
-  // widget that can be displayed on the top right corner
-  // on the same height as the back button
+  /// Widget that can be displayed on the top right corner
+  /// on the same height as the back button.
   final Widget? topRightWidget;
 
-  // (gets padding of one default icon size per default)
+  /// Gets padding of one default icon size per default.
   final double topRightWidgetWidth;
 
-  // title of the scaffold
+  /// Title of the scaffold.
   final String? title;
 
-  // if is back button or app icon with dropdown menu
+  /// If is back button or app icon with dropdown menu.
   final bool backButton;
 
-  // the back button icon
+  /// The back button icon.
   final IconData backButtonIcon;
 
-  // back button functionality
+  /// Back button functionality.
   final Function()? backButtonFunction;
 
-  // back button tooltip
+  /// Back button tooltip.
   final String? backButtonTooltip;
 
-  // if view should be cut off at the action button
-  // or if the action buttons float over the view
+  /// If view should be cut off at the action button
+  /// or if the action buttons float over the view.
   final bool cutOffAtActionButton;
 
+  /// Creates a new instance of the widget.
+  ///
+  /// The [child], [title], [backButton], [backButtonIcon], [backButtonFunction],
+  /// [backButtonTooltip], [cutOffAtActionButton], [actionButton], [topRightWidget],
+  /// and [topRightWidgetWidth] arguments are required.
   const DefaultScaffold({
     super.key,
     required this.child,
@@ -61,7 +65,7 @@ class DefaultScaffold extends StatelessWidget {
     this.topRightWidgetWidth = UIDefaults.defaultIconSize,
   });
 
-  // prompt installing as PWA if is enabled
+  /// Prompt installing as PWA if is enabled.
   void _promptInstallPWA() {
     final installer = PWAInstall();
     if (installer.installPromptEnabled) {
@@ -69,6 +73,10 @@ class DefaultScaffold extends StatelessWidget {
     }
   }
 
+  /// Builds the widget.
+  ///
+  /// The widget is composed of a [Scaffold] that contains a [Stack].
+  /// The [Stack] contains a [Padding] with the child widget and action button if any.
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);

@@ -6,14 +6,15 @@ import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/utils/ui_utils.dart';
 
 /// Class that handles the database
-// Note: this approach is not very efficient, since we load the whole database
-// every time we want to play a game
-// this works under the assumption that the database is quite small
-// but since it is "only" text based, it should be fine ( < 1MB)
+/// Note: this approach is not very efficient, since we load the whole database
+/// every time we want to play a game
+/// this works under the assumption that the database is quite small
+/// but since it is "only" text based, it should be fine ( < 1MB)
 class DataBaseHandler {
   // invoked on app start
   static Map<String, dynamic> categoriesDescriptor = {};
 
+  /// Loads the categories descriptor JSON file and replaces string colors to actual color objects.
   static Future loadCategoriesDescriptor() async {
     // load the categories descriptor json file
     String jsonString = await rootBundle
@@ -27,7 +28,8 @@ class DataBaseHandler {
     }
   }
 
-  /// loads the questions from the database that are to be played
+  /// Prepares the game state by loading only the active categories and the questions that have not been played yet.
+  /// Then shuffles all questions and adds them to the game state.
   static Future prepareGameState() async {
     // if the current game state is null, do nothing
     if (GameStateHandler.currentGameState == null) {
@@ -36,12 +38,6 @@ class DataBaseHandler {
 
     // get the current game state
     final state = GameStateHandler.currentGameState!;
-
-    // GOAL: load only the categories that are active
-    // (whitelist approach: done by loading only the categories that are active)
-    // as well as only the questions that have not been played yet
-    // (blacklist approach: done by loading all questions and removing the ones that have been played)
-    // then shuffle all questions and add them to the game state
 
     // load from database the txt files of active categories
     for (var category in state.categoriesActive) {

@@ -7,11 +7,23 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../ui_defaults.dart';
 
+/// A widget that represents the dialog for submitting an answer in a Yes/No game.
+///
+/// This widget is stateful, meaning that it has mutable state that can change over time.
+/// The state is managed by [_YesNoSubmitAnswerDialogWidgetState].
 class YesNoSubmitAnswerDialogWidget extends StatefulWidget {
+  /// The function to set the state of the parent widget.
   final StateSetter setState;
+
+  /// The answer object that represents the player's answer.
   final YesNoAnswer answer;
+
+  /// The color to use for the Yes/No text and slider.
   final Color yesNoColor;
 
+  /// Creates a new instance of [YesNoSubmitAnswerDialogWidget].
+  ///
+  /// The [setState], [answer], and [yesNoColor] arguments must not be null.
   const YesNoSubmitAnswerDialogWidget({
     super.key,
     required this.setState,
@@ -24,15 +36,16 @@ class YesNoSubmitAnswerDialogWidget extends StatefulWidget {
       _YesNoSubmitAnswerDialogWidgetState();
 }
 
+/// The state for a [YesNoSubmitAnswerDialogWidget].
 class _YesNoSubmitAnswerDialogWidgetState
     extends State<YesNoSubmitAnswerDialogWidget> {
-  // app strings
+  /// The localizations for the current app locale.
   AppLocalizations? localizations;
 
-  // whether has answered or not (which screen to show)
+  /// A flag that indicates whether the player has answered or not.
   bool _hasAnswered = false;
 
-  // the number of players in the game (and so the maximum number of answers)
+  /// The number of players in the game, which is also the maximum number of answers.
   final int _numberOfPlayers =
       GameStateHandler.currentGameState?.players.length ?? 0;
 

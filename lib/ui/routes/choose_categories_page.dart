@@ -5,22 +5,33 @@ import 'package:question_game/utils/base_utils.dart';
 
 import '../widgets/default_scaffold.dart';
 
+/// This is the ChooseCategoriesPage class which extends StatefulWidget.
+/// This class is responsible for displaying the categories to the user.
 class ChooseCategoriesPage extends StatefulWidget {
+  /// Constructor for the ChooseCategoriesPage class.
   const ChooseCategoriesPage({super.key});
 
+  /// Creates the mutable state for this widget at a given location in the tree.
   @override
   State<ChooseCategoriesPage> createState() => _ChooseCategoriesPageState();
 }
 
+/// This is the _ChooseCategoriesPageState class which extends State<ChooseCategoriesPage>.
+/// This class is responsible for the state of the ChooseCategoriesPage.
 class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
+  /// This is the list of items that will be displayed to the user.
   late final List _items = [];
+  /// This is the localization object used for internationalization.
   late AppLocalizations? loc;
+  /// This is a boolean value that indicates whether the page is loading or not.
   bool _loading = true;
 
+  /// This method is called when this object is inserted into the tree.
   @override
   void initState() {
     super.initState();
 
+    // Initialize the items and then set the loading state to false.
     _initItems().then(
       (value) => setState(() {
         _loading = false;
@@ -28,6 +39,7 @@ class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
     );
   }
 
+  /// This method is responsible for initializing the items.
   Future _initItems() async {
     // make list of categories from categories descriptor map
     for (var categoryKey in DataBaseHandler.categoriesDescriptor.keys) {
@@ -41,6 +53,7 @@ class _ChooseCategoriesPageState extends State<ChooseCategoriesPage> {
     }
   }
 
+  /// This method is responsible for building the widget tree.
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(

@@ -171,7 +171,13 @@ class UIUtils {
     return TextSpan(children: spans);
   }
 
-  /// sets the preferred device orientation
+
+  /// Sets the preferred device orientation to landscape mode.
+  ///
+  /// This method sets the preferred orientations to [DeviceOrientation.landscapeLeft]
+  /// and [DeviceOrientation.landscapeRight], meaning the device should be used in
+  /// landscape mode. This is an asynchronous operation and returns a [Future] that
+  /// completes when the orientation is set.
   static Future<void> setPreferredOrientation() async {
     return await SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,

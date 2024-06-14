@@ -1,79 +1,70 @@
 import 'package:question_game/database/database_handler.dart';
 import 'package:uuid/uuid.dart';
 
-/// Question class that holds the category id and the questionId
+/// Represents a question in the game.
 class Question {
+  /// The ID of the category this question belongs to.
   String categoryId;
+
+  /// The unique ID of this question within its category.
   int questionId;
+
+  /// The text of the question.
   String value;
 
+  /// Constructor for the Question class.
   Question(this.categoryId, this.questionId, this.value);
 }
 
-/// holds the state of the game
+/// Represents the state of the game.
 class GameState {
-  // unique game id
+  /// The unique ID of the game.
   String gameId = '';
 
-  // timestamp of when the game was played the last time
+  /// The timestamp of when the game was last played.
   int lastPlayed = 0;
 
-  // list of player names
+  /// The list of player names.
   List<String> players = [];
 
-  // categoryId -> line numbers played in that category
+  /// The list of questions that have been played, categorized by their category ID.
   Map<String, List<int>> questionsPlayed = {};
 
-  // categories (ids) active
+  /// The list of active categories (by ID).
   List<String> categoriesActive = [];
 
-  // the questions that will be played,
-  // this is a list that contains the category id and the value of the question
-  // as well as the questionId in the database
-  // they will not be stored in the database (when toJson is being called)
+  /// The list of questions that will be played in this game.
   final questions = <Question>[];
 
-  // store current question as a variable so that it can be accessed from static currentGameState
-  // will be set in next()
+  /// The current question being asked.
   Question? currentQuestion;
 
-  /// returns the next question to be played
-  /// and handles the xy replacement
+  /// Returns the next question to be played and handles the xy replacement.
   Question? next() {
+    // If there are no more questions, return null
     if (questions.isEmpty) {
       return null;
     }
 
-    // pop the first question from the list
+    // Remove the first question from the list and set it as the current question
     currentQuestion = questions.removeAt(0);
 
-    // add the question id to the list of questions played
+    // Add the question id to the list of questions played
     questionsPlayed[currentQuestion!.categoryId]?.add(currentQuestion!.questionId);
 
-    // if the question is of category 4 (yes/no)
-    // and there are not at least 2 players,
-    // skip the question
+    // If the question is of category 4 (yes/no) and there are not at least 2 players, skip the question
     if (currentQuestion!.categoryId == '4' && players.length < 2) {
       return next();
     }
 
-    // xy replacement
-    // xy is a placeholder for a player name
-    // if there are more xy in the text than players,
-    // skip the question
+    // If there are more xy in the text than players, skip the question
     if (currentQuestion!.value.split('xy').length - 1 > players.length) {
       return next();
     }
 
-    // replace every xy in the question
-    // with a (different and random) player name
-    // to do so, shuffle the list of players,
-    // then iterate over the question and replace every xy
-    // with the next player name
+    // Replace every xy in the question with a (different and random) player name
     players.shuffle();
-
     int counter = 0;
-
     currentQuestion!.value = currentQuestion!.value.replaceAllMapped('xy', (match) {
       return players[counter++];
     });
@@ -81,6 +72,7 @@ class GameState {
     return currentQuestion;
   }
 
+  /// Returns the total number of questions that have been played.
   int getNumberOfPlayedQuestions() {
     int count = 0;
     for (var category in questionsPlayed.keys) {
@@ -89,22 +81,21 @@ class GameState {
     return count;
   }
 
-  // init as new game
+  /// Initializes a new game with the given active categories.
   GameState(this.categoriesActive) {
-    // create a new game with empty player name
+    // Create a new game with empty player name
     players.add('');
-    // and a new game uuid
+    // Generate a new game uuid
     gameId = const Uuid().v4();
-    // create an empty map for the questions played
+    // Create an empty map for the questions played
     questionsPlayed = {
       for (var i = 0; i < DataBaseHandler.categoriesDescriptor.length; i++)
         i.toString(): []
     };
   }
 
-  // Convert GameState object to JSON
-  // note: the questions that have been loaded
-  // from the database will not be saved!
+  /// Converts the GameState object to a JSON representation.
+  /// Note: the questions that have been loaded from the database will not be saved!
   Map<String, dynamic> toJson() {
     return {
       'gameId': gameId,
@@ -115,7 +106,7 @@ class GameState {
     };
   }
 
-  // Create GameState object from JSON
+  /// Creates a GameState object from a JSON representation.
   GameState.fromJson(Map<String, dynamic> json)
       : gameId = json['gameId'],
         lastPlayed = json['lastPlayed'],
