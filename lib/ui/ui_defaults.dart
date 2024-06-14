@@ -32,10 +32,10 @@ class UIDefaults {
   static const defaultButtonHeight = 48.0;
 
   /// The default text size for game titles in the application.
-  static const gameTitleTextSize = 55.0;
+  static const gameTitleTextSize = 51.0;
 
   /// The default text size for body text in the game.
-  static const gameBodyTextSize = 27.0;
+  static const gameBodyTextSize = 23.4;
 
   /// The default text style for body text in the game.
   static const gameBodyTextStyle = TextStyle(
