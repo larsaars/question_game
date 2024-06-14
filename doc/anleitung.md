@@ -14,6 +14,8 @@ Beispiel: "Wer von euch hat die meisten Kugelschreiber?"
 - **Ja oder Nein**: Es wird eine Aussage getätigt (vom Spiel), die sich entweder mit "Ja" oder "Nein" beantworten lässt. Im Folgenden kann jede(r) MitspielerIn seine/ihre Antwort sowie eine Schätzung, wie viele der in der Gruppe anwesenden Personen diese Frage mit JA beantworten, anonym in der App abgeben. Hat das jeder gemacht, wird aufgelöst, wie viele Personen die Frage mit JA beantwortet haben. Für das Richtig-Schätzen der JA-Antworten gibt es Punkte.
 Beispiel: "Ich glaube an das Testen von Medikamenten an Menschen."
 
+Anmerkung: Im jetzigen Zustand besteht die Fragen-Datenbank nur aus einigen wenigen Fragen, die zu Test Zwecken dienen.
+
 ## Hauptmenü
 Man startet das Spiel (z.B. auf der Website) und wird mit dem Hauptmenü begrüßt. Dort hat man die Möglichkeit, auf "SPIELEN" oder "KATEGORIEN AUSWÄHLEN" zu klicken.
 
