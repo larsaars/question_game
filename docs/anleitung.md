@@ -53,7 +53,7 @@ Anmerkung: Die Liste aktiver Mitspieler kann jederzeit im Spiel selbst veränder
 </div>
 <div style="display: inline-block; margin: 10px; text-align: center;">
     <img src="screenshots/game_selection/old_games_list_page.png" alt="old games list page" width="40%">
-    <p style="text-align: center;">Alte Spiele Liste</p>
+    <p align="center" style="text-align: center;">Alte Spiele Liste</p>
 </div>
 
 ## Das Spiel läuft - Bilder-Beispiele zu den einzelnen Kategorien
