@@ -1,7 +1,9 @@
 # Anleitung mit Bildern (German)
+
 Diese Anleitung dient dazu, den Fluss des Spiels zu erklären und die verschiedenen wichtigsten Funktionalitäten zu zeigen.
 
-## Kontext - Ziel des Spiels
+## Konzept - Ziel des Spiels
+
 Ziel des Spiels ist es, Gruppen zu unterhalten und Gespräche anzuregen. Startet man ein Spiel, so trägt man zunächst alle MitspielerInnen ein. Es gibt verschiedene Spiele-Kategorien (die für verschiedene Spiele aktiviert oder deaktiviert werden können), aus denen im Verlaufe des Spiels zufällig ausgewählt wird. Jede dieser Spielekategorien ist wie ein eigenes kleines Spiel und funktioniert jeweils immer ein wenig anders. Die Spiele-Kategorien sind:
 
 - **Fragen**: Es werden Fragen gestellt, und alle MitspielerInnen geben an, ob sie die gegebene Frage mit "Ja" oder "Nein" beantworten bzw. dem Inhalt zustimmen oder nicht (z.B. durch das Heben der Hand).
@@ -17,13 +19,16 @@ Beispiel: "Ich glaube an das Testen von Medikamenten an Menschen."
 Anmerkung: Im jetzigen Zustand besteht die Fragen-Datenbank nur aus einigen wenigen Fragen, die zu Test Zwecken dienen.
 
 ## Hauptmenü
+
 Man startet das Spiel (z.B. auf der Website) und wird mit dem Hauptmenü begrüßt. Dort hat man die Möglichkeit, auf "SPIELEN" oder "KATEGORIEN AUSWÄHLEN" zu klicken.
 
 <div align="center" style="display: inline-block; margin: 10px; text-align: center;">
     <img src="screenshots/home_page.png" alt="home page" width="80%">
     <p align="center" style="text-align: center;">Hauptmenü</p>
 </div>
-Kategorien wählen
+
+## Kategorien wählen
+
 Entscheidet man sich dazu, auf "KATEGORIEN AUSWÄHLEN" zu drücken, so landet man auf einer Seite, auf der man auswählen kann, mit welchen Kategorien gespielt wird, sollte ein neues Spiel gestartet werden.
 
 <div align="center" style="display: inline-block; margin: 10px; text-align: center;">
