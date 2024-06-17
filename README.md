@@ -10,7 +10,7 @@ The app is as of now purely in German.
 - For a simple overview of the functionality of the project, please refer to [Anleitung mit Bildern (German)](doc/anleitung.md) article.
 - For a general overview of the project structure, please refer to [Project Structure](doc/project_structure.md) article.
 - For detailed code documentation, please refer to [doc/api/index.html](doc/api/index.html) (to display clone repo and view in your local browser).
-- The “Abschlussbericht” with the working hours can be found [here](doc/Abschlussbericht.pdf)
+- The “Abschlussbericht” with the working hours can be found [here](doc/Abschlussbericht.pdf).
 
 ## Executing
 ### Website
