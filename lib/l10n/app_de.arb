@@ -1,5 +1,5 @@
 {
-  "appTitle": "fragenspiel",
+  "appTitle": "freitagabend",
   "appVersion": "1.0",
 
   "yes": "JA",
@@ -32,20 +32,20 @@
   "gameExit": "Spiel verlassen",
   "gameSkip": "Frage überspringen",
   "gameNoQuestionsLeft": "Es sind leider keine Fragen mehr übrig!",
-  "gameDefaultRequestPlayerAction": "HEB DIE HAND",
+  "gameDefaultRequestPlayerAction": "TRINK",
   "gameTitleTextChallenge": "CHALLENGE!",
-  "gameBodyTextChallenge": "Bei der folgenden Challenge geht es um Schnelligkeit. Wer es schafft, die Challenge als erstes zu bestreiten, hat gewonnen.",
+  "gameBodyTextChallenge": "Bei der folgenden Challenge geht es um Schnelligkeit. Wer es schafft, die Challenge als erstes zu bestreiten, darf {randomCount, plural, =1{einen Schluck} other{{randomCount} Schlucke}} verteilen.",
   "gameTitleTextPoll": "ABSTIMMUNG!",
   "gameBodyTextPoll": "Es folgt eine Frage. Lest diese laut vor und stimmt dann auf drei für eine Person, auf welche die Beschreibung eurer Meinung nach am ehesten zutrifft.",
   "gameTitleTextBomb": "BOMBE",
-  "gameBodyTextBomb": "Sobald ihr auf \"Bombe starten\" drückt erscheint eine Kategorie/Frage. Findet nun reihum passende Antwortmöglichkeiten. Diese dürfen sich nicht wiederholen. Die Person bei der die Bombe explodiert, hat verloren.",
+  "gameBodyTextBomb": "Sobald ihr auf \"Bombe starten\" drückt erscheint eine Kategorie/Frage. Findet nun reihum passende Antwortmöglichkeiten. Diese dürfen sich nicht wiederholen. Die Person bei der die Bombe explodiert, hat verloren und muss {randomCount, plural, =1{einen Schluck} other{{randomCount} Schlucke}} trinken.",
   "gameStartBombButton": "Bombe starten",
   "gameTitleTextYesNo": "JA oder NEIN",
   "gameYesNoExplanation1": "Es folgt eine Aussage, die sich entweder mit \"Ja\" oder mit \"Nein\" beantworten lässt. Lest diese laut vor und macht euch kurz darüber Gedanken, wie ihr persönlich dazu steht - allerdings ohne euch auszutauschen! Folgt danach den Anweisungen auf dem Display.",
-  "gameYesNoExplanation2": "Reicht nun das Handy herum und gebt an, wie ihr zu der Aussage steht und von wie vielen eurer Mitspieler*innen ihr denkt, dass sie die Frage mit \"Ja\" beantworten. Andere Mitspieler*innen können eure Antwort nicht sehen! Wer richtig liegt bekommt Punkte!",
+  "gameYesNoExplanation2": "Reicht nun das Handy herum und gebt an, wie ihr zu der Aussage steht und von wie vielen eurer Mitspieler*innen ihr denkt, dass sie die Frage mit \"Ja\" beantworten. Andere Mitspieler*innen können eure Antwort nicht sehen! Wer richtig liegt darf Schlucke verteilen!",
   "gameYesNoAnswersReady": "Alle Personen haben geantwortet. Seid ihr bereit für die Antwort?",
   "gameYesNoYourGuess": "Deine Schätzung, wie viele Personen auf diese Frage mit JA antworten:",
   "gameYesNoPlayerAnsweredYes": "<b>{count, plural, =1{Spieler hat} other{Spieler haben}} JA geantwortet.</b>",
-  "gameYesNoPlayerGuessedCorrectly": "{count, plural, =1{<b>{playerNames}</b> hat richtig getippt und bekommt} other{<b>{playerNames}</b> haben richtig getippt und bekommen}} drei Punkte.",
-  "gameYesNoPlayerGuessedOneOff": "{count, plural, =1{<b>{playerNames}</b> hat sich um eins verschätzt und bekommt} other{<b>{playerNames}</b> haben sich um eins verschätzt und bekommen}} einen Punkt."
+  "gameYesNoPlayerGuessedCorrectly": "{count, plural, =1{<b>{playerNames}</b> hat richtig getippt und darf} other{<b>{playerNames}</b> haben richtig getippt und dürfen}} drei Schlucke verteilen.",
+  "gameYesNoPlayerGuessedOneOff": "{count, plural, =1{<b>{playerNames}</b> hat sich um eins verschätzt und darf} other{<b>{playerNames}</b> haben sich um eins verschätzt und dürfen}} einen Schluck verteilen."
 }

@@ -4,6 +4,7 @@ import 'package:question_game/database/gamestate_handler.dart';
 import 'package:question_game/ui/ui_defaults.dart';
 import 'package:question_game/ui/widgets/default_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:question_game/utils/base_utils.dart';
 import 'package:question_game/utils/navigation_utils.dart';
 import 'package:question_game/utils/ui_utils.dart';
 
@@ -146,7 +147,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
           case '1': // challenge
             _needsSecondTap = true;
             _titleText = localizations!.gameTitleTextChallenge;
-            _bodyText = localizations!.gameBodyTextChallenge;
+            _bodyText = localizations!.gameBodyTextChallenge(BaseUtils.random.nextInt(4) + 1); // number of random sips
             break;
           case '2': // poll
             _needsSecondTap = true;
@@ -156,7 +157,7 @@ class _MainGamePageState extends State<MainGamePage> with RouteAware {
           case '3': // bomb
             _needsSecondTap = true;
             _titleText = localizations!.gameTitleTextBomb;
-            _bodyText = localizations!.gameBodyTextBomb;
+            _bodyText = localizations!.gameBodyTextBomb(BaseUtils.random.nextInt(4) + 1); // number of random sips
             break;
           case '4': // yes or no
             _needsSecondTap = false;
